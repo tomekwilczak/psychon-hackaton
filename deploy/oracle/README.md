@@ -67,7 +67,7 @@ Ręczna aktualizacja awaryjna:
 ```bash
 cd ~/psychon
 git fetch origin main:refs/remotes/origin/main
-git switch main || git switch --create main --track origin/main
+git switch main || git switch --create main origin/main
 git reset --hard origin/main
 bash deploy/oracle/deploy.sh
 ```

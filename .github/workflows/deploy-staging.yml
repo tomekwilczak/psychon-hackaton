@@ -45,7 +45,7 @@ jobs:
           host: ${{ secrets.STAGING_HOST }}
           username: ${{ secrets.STAGING_USER }}
           key: ${{ secrets.STAGING_SSH_KEY }}
-          script_stop: true
+          command_timeout: 20m
           script: |
             set -eu
             cd ~/psychon
@@ -53,7 +53,7 @@ jobs:
             if git show-ref --verify --quiet refs/heads/main; then
               git switch main
             else
-              git switch --create main --track origin/main
+              git switch --create main origin/main
             fi
             git reset --hard origin/main
 
