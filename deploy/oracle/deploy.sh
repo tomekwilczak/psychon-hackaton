@@ -15,12 +15,16 @@ fi
 "${compose[@]}" config --quiet
 
 echo "Przygotowuję prywatne wolumeny aplikacji..."
-"${compose[@]}" run --rm --no-deps --user 0:0 --entrypoint sh app -lc \
+"${compose[@]}" run --rm --no-deps --label traefik.enable=false --user 0:0 --entrypoint sh app -lc \
   'mkdir -p vendor storage/framework/cache storage/framework/sessions storage/framework/views storage/logs bootstrap/cache && chown -R 33:33 vendor storage bootstrap/cache'
 
 echo "Instaluję zależności backendu..."
-"${compose[@]}" run --rm --no-deps app \
+"${compose[@]}" run --rm --no-deps --label traefik.enable=false app \
   composer install --no-interaction --no-dev --prefer-dist --no-progress --optimize-autoloader
+
+echo "Buduję frontend..."
+"${compose[@]}" run --rm --no-deps --label traefik.enable=false frontend \
+  sh -c "npm ci && npm run build"
 
 echo "Uruchamiam usługi Psychon..."
 "${compose[@]}" up -d pgsql redis mailpit
