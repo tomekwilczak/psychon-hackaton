@@ -15,6 +15,7 @@
 */
 
 use App\Http\Controllers\Api\V1\Admin\CourseCatalogAdminController;
+use App\Http\Controllers\Api\V1\Admin\CourseSequenceController;
 use App\Http\Controllers\Api\V1\Admin\LessonAdminController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,4 +37,11 @@ Route::middleware(['auth:sanctum', 'role:project_manager,super_admin'])->group(f
     Route::post('/admin/courses/{course}/lessons', [LessonAdminController::class, 'store'])->whereNumber('course');
     Route::patch('/admin/lessons/{lesson}', [LessonAdminController::class, 'update'])->whereNumber('lesson');
     Route::delete('/admin/lessons/{lesson}', [LessonAdminController::class, 'destroy'])->whereNumber('lesson');
+
+    // `PATCH .../reorder` to legalny wyjątek nazewniczy wymieniony w kontrakcie §1.
+    // Literalny segment `reorder` nie zostanie przechwycony przez
+    // `PATCH /admin/courses/{course}`, bo tamta trasa ma `whereNumber('course')`.
+    Route::patch('/admin/courses/reorder', [CourseSequenceController::class, 'reorderCourses']);
+    Route::post('/admin/courses/reorder/preview', [CourseSequenceController::class, 'preview']);
+    Route::patch('/admin/courses/{course}/lessons/reorder', [CourseSequenceController::class, 'reorderLessons'])->whereNumber('course');
 });
