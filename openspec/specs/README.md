@@ -42,7 +42,7 @@ zmiany, nazwa poniżej to propozycja do zaakceptowania przy starcie pakietu.
 | `participant-profile` | H01 | proponowana | dane profilu, PESEL/adres szyfrowane, zgody |
 | `gdpr-data-export` | H01 | proponowana | eksport RODO w tle, 5 zakresów danych |
 | `recruitment-applications` | H03 | proponowana | kolejka zgłoszeń, akceptacja/odrzucenie, import CSV |
-| `time-limited-access` | H04 | proponowana | wyjątki `access.active`, `extend-access`, audyt |
+| `time-limited-access` | H04 | **merged** (backfill, `h04-dostep-czasowy`) | wyjątki `access.active`, `extend-access`, audyt |
 | `course-catalog` | H05 | **merged** (backfill, `h05-katalog-kursow`) | lista etapów, `CourseAccess`, blokada z powodem — 4 odstępstwa oczekują na zatwierdzenie strażnika |
 | `reliability-monitoring` | H07 | proponowana | rzetelność z `ProgressAggregator`, próg, izolacja grup |
 | `course-content-management` | H08a | proponowana | CRUD kursów/lekcji, kolejność, soft delete |
