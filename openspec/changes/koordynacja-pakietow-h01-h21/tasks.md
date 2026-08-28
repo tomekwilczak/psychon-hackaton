@@ -42,7 +42,7 @@
 ## 5. Fala P2
 
 - [x] 5.1 H14 — Dokumenty generowane z profilu · Właściciel: `Błażej` · Status: `DONE`; weryfikacja: kryteria akceptacji i testy H14 przechodzą, istnieje `DEMO/H14.md`.
-- [ ] 5.2 H15 — Profil psychologa · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: kryteria akceptacji i testy H15 przechodzą, istnieje `DEMO/H15.md`.
+- [ ] 5.2 H15 — Profil psychologa · Właściciel: `Błażej` · Status: `W TOKU`; weryfikacja: kryteria akceptacji i testy H15 przechodzą, istnieje `DEMO/H15.md`.
 - [ ] 5.3 H17 — Pytania do prowadzącego · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: kryteria akceptacji i testy H17 przechodzą, istnieje `DEMO/H17.md`.
 - [ ] 5.4 H20 — Raporty i dziennik działań · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: kryteria akceptacji i testy H20 przechodzą, istnieje `DEMO/H20.md`.
 
