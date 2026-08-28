@@ -15,6 +15,7 @@
 */
 
 use App\Http\Controllers\Api\V1\Admin\CourseCatalogAdminController;
+use App\Http\Controllers\Api\V1\Admin\LessonAdminController;
 use Illuminate\Support\Facades\Route;
 
 if (! config('features.h08')) {
@@ -28,4 +29,11 @@ Route::middleware(['auth:sanctum', 'role:project_manager,super_admin'])->group(f
     Route::get('/admin/courses/{course}', [CourseCatalogAdminController::class, 'show'])->whereNumber('course');
     Route::patch('/admin/courses/{course}', [CourseCatalogAdminController::class, 'update'])->whereNumber('course');
     Route::delete('/admin/courses/{course}', [CourseCatalogAdminController::class, 'destroy'])->whereNumber('course');
+
+    // Płaski prefiks `/admin/lessons/{id}` dla edycji i usunięcia jest spójny
+    // z `POST /admin/lessons/{id}/materials` z karty pakietu (H08b).
+    Route::get('/admin/courses/{course}/lessons', [LessonAdminController::class, 'index'])->whereNumber('course');
+    Route::post('/admin/courses/{course}/lessons', [LessonAdminController::class, 'store'])->whereNumber('course');
+    Route::patch('/admin/lessons/{lesson}', [LessonAdminController::class, 'update'])->whereNumber('lesson');
+    Route::delete('/admin/lessons/{lesson}', [LessonAdminController::class, 'destroy'])->whereNumber('lesson');
 });
