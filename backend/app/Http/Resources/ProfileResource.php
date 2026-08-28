@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Consent;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -11,7 +12,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * PESEL in full (contract §2, spec M2); masking for other viewers lives on
  * the person card (H18), not here.
  *
- * @mixin \App\Models\User
+ * @mixin User
  */
 class ProfileResource extends JsonResource
 {
