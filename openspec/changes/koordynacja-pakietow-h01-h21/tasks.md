@@ -29,7 +29,7 @@
 
 ## 4. Fala P0.5 i P1
 
-- [ ] 4.1 H03 — Rekrutacja i kolejka zgłoszeń · Właściciel: `Mikołaj` · Status: `W TOKU`; weryfikacja: kryteria akceptacji i testy H03 przechodzą, istnieje `DEMO/H03.md`.
+- [x] 4.1 H03 — Rekrutacja i kolejka zgłoszeń · Właściciel: `Mikołaj` · Status: `DONE` (PR #33 scalony); weryfikacja: kryteria akceptacji i testy H03 przechodzą, istnieje `DEMO/H03.md`.
 - [ ] 4.2 H04 — Dostęp czasowy · Właściciel: `Irek` · Status: `REVIEW`; weryfikacja: kryteria akceptacji i testy H04 przechodzą, istnieje `DEMO/H04.md`.
 - [ ] 4.3 H07 — Pomiar czasu nauki i rzetelność · Właściciel: `Mikołaj` · Status: `W TOKU`; weryfikacja: kryteria akceptacji i testy H07 przechodzą, istnieje `DEMO/H07.md`.
 - [ ] 4.4 H08 — CMS treści · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: uzgodniona część H08a/H08b oraz jej testy przechodzą, istnieje `DEMO/H08.md` z jawnym zakresem.
