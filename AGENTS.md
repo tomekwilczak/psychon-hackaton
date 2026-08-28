@@ -59,4 +59,4 @@ Base path `/api/v1`, Sanctum Bearer auth, responses always wrapped in `{"data": 
 
 ## Commit & Pull Request Guidelines
 
-Branch `pakiet/HXX-nazwa`; max one open PR per team, ~400 lines max. Flow: partner review → liaison review → staff merge; CI (Pint, PHPUnit, ESLint, build) must pass. Package commits use `feat(HXX): opis zmiany`. Document demo results in `DEMO/HXX.md`. The complete closeout and PR checklist is @docs/hackathon/06-workflow-pakietu-i-pr.md.
+Branch `pakiet/HXX-nazwa`; keep PRs near 400 lines when the vertical slice permits it. Multiple package PRs may be open concurrently. Flow: partner review → liaison review → staff merge; CI (Pint, PHPUnit, ESLint, build) must pass. Package commits use `feat(HXX): opis zmiany`. Document demo results in `DEMO/HXX.md`. The complete closeout and PR checklist is @docs/hackathon/06-workflow-pakietu-i-pr.md.

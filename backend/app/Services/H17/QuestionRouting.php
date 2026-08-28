@@ -6,6 +6,7 @@ use App\Models\CourseAssignment;
 use App\Models\InstructorQuestion;
 use App\Models\Lesson;
 use App\Models\User;
+use App\Services\H09\AssignmentResolver;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
@@ -13,9 +14,8 @@ use Illuminate\Database\Eloquent\Builder;
  *
  * The inheritance rule itself belongs to H09, which exposes it as
  * `App\Services\H09\AssignmentResolver::forLesson()` (handshake K8 in
- * DEMO/H9-prep-doc.md). This class consumes that rule and only falls back to an
- * equivalent query while H09 is not merged yet — once it lands, delete
- * `fallbackForLesson()`, not the entry points.
+ * DEMO/H9-prep-doc.md). H09 has merged, so this class now consumes that rule
+ * directly; the local fallback copy is gone, as its own note instructed.
  *
  * The addressee is resolved at read time. `instructor_questions` deliberately has
  * no `instructor_id` column, which is what makes „a new instructor inherits the
@@ -24,19 +24,14 @@ use Illuminate\Database\Eloquent\Builder;
  */
 final class QuestionRouting
 {
-    private const H09_RESOLVER = 'App\Services\H09\AssignmentResolver';
-
     /**
      * The instructor a question about this lesson is addressed to right now,
      * or null when neither the lesson nor its course has an active assignment.
      */
     public static function forLesson(Lesson $lesson): ?User
     {
-        if (class_exists(self::H09_RESOLVER)) {
-            return (self::H09_RESOLVER)::forLesson($lesson);
-        }
-
-        return self::fallbackForLesson($lesson);
+        // H09 exposes the rule as an instance method, alongside forCourse().
+        return (new AssignmentResolver)->forLesson($lesson);
     }
 
     /**
@@ -93,25 +88,5 @@ final class QuestionRouting
             ->unique()
             ->values()
             ->all();
-    }
-
-    /**
-     * The same inheritance rule as H09's resolver, kept here only until H09 merges.
-     */
-    private static function fallbackForLesson(Lesson $lesson): ?User
-    {
-        $assignment = CourseAssignment::query()
-            ->where('course_id', $lesson->course_id)
-            ->whereNull('unassigned_at')
-            ->where(fn (Builder $query): Builder => $query
-                ->where('lesson_id', $lesson->id)
-                ->orWhereNull('lesson_id'))
-            // A lesson-level row beats the course-level one; NULLs sort last here.
-            ->orderByRaw('lesson_id IS NULL')
-            ->orderBy('id')
-            ->with('instructor')
-            ->first();
-
-        return $assignment?->instructor;
     }
 }

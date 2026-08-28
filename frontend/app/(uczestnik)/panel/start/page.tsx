@@ -226,7 +226,7 @@ export default function ParticipantStartPage() {
 
   if (editing && form) {
     return (
-      <div className="flex max-w-2xl flex-col gap-6">
+      <div className="flex flex-col gap-6">
         <h1 className="text-h2 font-black text-ink">Edytuj ekran „Zacznij tutaj”</h1>
 
         <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-6">
@@ -336,7 +336,7 @@ export default function ParticipantStartPage() {
   }
 
   return (
-    <div className="flex max-w-2xl flex-col gap-6">
+    <div className="flex flex-col gap-6">
       <div className="flex items-start justify-between gap-4">
         <h1 className="text-h2 font-black text-ink">Zacznij tutaj</h1>
         {isAdmin && (

@@ -248,7 +248,7 @@ export default function ProfilePage() {
   const err = (key: string) => fieldErrors[key]?.[0];
 
   return (
-    <div className="flex max-w-2xl flex-col gap-6">
+    <div className="flex flex-col gap-6">
       <h1 className="text-h2 font-black text-ink">Profil</h1>
 
       <Card title="Dane osobowe">

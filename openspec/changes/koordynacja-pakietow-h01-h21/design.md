@@ -1,6 +1,6 @@
 ## Context
 
-Pakiety H01–H21 są zdefiniowane jako samodzielne pionowe wycinki obejmujące API, ekran, testy i dane demo. Repozytorium narzuca jeden kontrakt API, zamrożone migracje, własność plików współdzielonych oraz limit jednego oficjalnego PR-a zespołu do repozytorium Fundacji.
+Pakiety H01–H21 są zdefiniowane jako samodzielne pionowe wycinki obejmujące API, ekran, testy i dane demo. Repozytorium narzuca jeden kontrakt API, zamrożone migracje, własność plików współdzielonych oraz obowiązkowe review i bramki CI dla każdego oficjalnego PR-a do repozytorium Fundacji; wiele pakietowych PR-ów może pozostawać otwartych równolegle.
 
 Zespół liczy pięć kodujących osób. Osoby nie mają stałych domen: po ukończeniu pakietu pobierają kolejny gotowy pakiet z priorytetyzowanej kolejki.
 
