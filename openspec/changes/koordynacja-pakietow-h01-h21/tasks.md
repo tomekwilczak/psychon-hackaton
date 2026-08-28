@@ -17,7 +17,7 @@
 
 - [ ] 3.1 H01 — Profil użytkownika i eksport RODO · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: kryteria ★ i testy H01 przechodzą, istnieje `DEMO/H01.md`.
 - [ ] 3.2 H02 — Uprawnienia i test-kit matrycy · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: kryteria ★ i testy H02 przechodzą, istnieje `DEMO/H02.md`.
-- [ ] 3.3 H05 — Katalog kursów i sekwencyjne odblokowanie · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: kryteria ★ i testy H05 przechodzą, istnieje `DEMO/H05.md`.
+- [ ] 3.3 H05 — Katalog kursów i sekwencyjne odblokowanie · Właściciel: `@MariuszJendrzejczak` · Status: `W TOKU`; weryfikacja: kryteria ★ i testy H05 przechodzą, istnieje `DEMO/H05.md`.
 - [ ] 3.4 H06 — Lekcja, odtwarzacz i postęp · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: kryteria ★ i testy H06 przechodzą, istnieje `DEMO/H06.md`.
 - [ ] 3.5 H10 — Testy wiedzy i warsztat · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: kryteria ★ i testy H10 przechodzą, istnieje `DEMO/H10.md`.
 - [ ] 3.6 H13★ — Minimum certyfikatu i warunków ukończenia · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: kryteria oznaczone ★ w H13 przechodzą, istnieje sekcja minimum w `DEMO/H13.md`.
