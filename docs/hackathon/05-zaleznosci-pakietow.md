@@ -242,7 +242,7 @@ flowchart LR
   end
   subgraph TB["Tor B · administracja"]
     direction LR
-    B0["H19"]:::done --> B1["H18"]:::todo --> B2["H03"]:::wip --> B3["H20"]:::todo
+    B0["H19"]:::done --> B1["H18"]:::done --> B2["H03"]:::wip --> B3["H20"]:::todo
   end
   subgraph TC["Tor C · szyna i uprawnienia"]
     direction LR
@@ -250,7 +250,7 @@ flowchart LR
   end
   subgraph TD["Tor D · program poza kursami"]
     direction LR
-    D0["H11"]:::done --> D1["H12"]:::done --> D2["H07"]:::todo
+    D0["H11"]:::done --> D1["H12"]:::done --> D2["H07"]:::wip
   end
   subgraph TE["Tor E · treści i ludzie"]
     direction LR
@@ -258,12 +258,13 @@ flowchart LR
   end
   subgraph TF["Tor F · dokumenty"]
     direction LR
-    F0["H14"]:::done --> F1["H15"]:::wip
+    F0["H14"]:::done --> F1["H15"]:::done
   end
 ```
 
-Stan wg `openspec/changes/koordynacja-pakietow-h01-h21/tasks.md` (2026-08-28): `DONE`/`REVIEW` →
-zielony, `W TOKU` → żółty, `GOTOWE` (nieodebrany) i `BLOCKED` → czerwony.
+Stan wg `openspec/changes/koordynacja-pakietow-h01-h21/tasks.md` (2026-08-28, po synchronizacji
+H07/H15/H18): `DONE`/`REVIEW` → zielony, `W TOKU` → żółty, `GOTOWE` (nieodebrany) i `BLOCKED` →
+czerwony.
 
 Uwaga do torów A i E: strzałka `H21 → H01 → H05` nie jest blokadą techniczną, tylko
 **kolejnością zwrotu z inwestycji** — H21 i H19 to pakiety S, dowożone w kilka godzin,
