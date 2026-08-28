@@ -79,7 +79,7 @@
 - [x] 6.6 Uzupełnić `DEMO/H02.md` o wynik testów, scenariusz ręczny i listę świadomych
       braków (pokrycie tylko tras H01/H16, `matrix_5d`/`matrix_5e` skipped, brak
       testów frontendowych)
-- [ ] 6.7 Otworzyć PR z gałęzi `pakiet/H02-uprawnienia`; przegląd partnerski → przegląd
+- [x] 6.7 Otworzyć PR z gałęzi `pakiet/H02-uprawnienia`; przegląd partnerski → przegląd
       łącznika → merge przez sztab (decyzja o scaleniu do `main` należy do właściciela
       repo, nie tego pakietu) — **wymaga potwierdzenia użytkownika** (push + PR to
       akcje z wymaganą jawną zgodą)

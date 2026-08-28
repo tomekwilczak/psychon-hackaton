@@ -43,4 +43,4 @@
 - [x] 5.2 `docker compose exec app php artisan test` — cały pakiet zielony w kontekście pełnego zestawu (51 passed)
 - [x] 5.3 `./vendor/bin/pint` (pliki pakietu) i `npm run lint` + `npm run build` (frontend) bez zastrzeżeń
 - [x] 5.4 Uzupełnić `DEMO/H21.md` o wynik testów i weryfikację lokalną (komendy, liczby)
-- [ ] 5.5 Otworzyć PR z gałęzi `pakiet/H21-onboarding` (≤ ~400 linii); przegląd partnerski → przegląd łącznika → merge przez sztab — **wymaga potwierdzenia użytkownika** (push + PR to akcje z wymaganą jawną zgodą)
+- [x] 5.5 Otworzyć PR z gałęzi `pakiet/H21-onboarding` (≤ ~400 linii); przegląd partnerski → przegląd łącznika → merge przez sztab — **wymaga potwierdzenia użytkownika** (push + PR to akcje z wymaganą jawną zgodą)

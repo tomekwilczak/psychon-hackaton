@@ -75,11 +75,13 @@
 
 ## 6. Odbiór
 
-- [ ] 6.1 `docker compose exec app php artisan test --filter=H19` zielony
-      (10/10); **pełny `php artisan test` (cały pakiet) nie uruchomiony** —
+- [x] 6.1 `docker compose exec app php artisan test --filter=H19` zielony
+      (10/10). W sesji H19 pełny `php artisan test` nie był uruchomiony —
       uniknięto uruchamiania obcych testów na wspólnej bazie
-      `niepodzielni_testing` równolegle z sesją H14
+      `niepodzielni_testing` równolegle z sesją H14; domknięte później na
+      `main`: pełny pakiet 524 passed / 2288 asercji, bez pominięć
 - [x] 6.2 Pint (pliki H19) i `npm run lint -- --fix` + `npm run build` — czysto
 - [ ] 6.3 Pełne ręczne przejście w przeglądarce — **nie wykonane**, patrz 5.6
 - [x] 6.4 `DEMO/H19.md` uzupełniony
-- [ ] 6.5 PR jeszcze nie otwarty
+- [x] 6.5 PR otwarty i scalony — PR #4 (`pakiet/H19-pulpit-i-ustawienia`,
+      merge `8fa9710`); w chwili pisania tej listy jeszcze nie istniał

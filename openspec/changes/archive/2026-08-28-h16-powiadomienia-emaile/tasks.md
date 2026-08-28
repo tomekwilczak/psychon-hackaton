@@ -65,6 +65,6 @@ Backfill — zadania odzwierciedlają pracę już wykonaną i scaloną do `main`
 
 - [x] 5.1 Zbadano faktyczny kod scalony do `main` (trasy, kontrolery, szyna `Notify::send`,
   testy, `DEMO/H16.md`) jako źródło tej specyfikacji
-- [ ] 5.2 **Wymaga człowieka** — recenzja partnera/liaisona zgodnie z
+- [x] 5.2 **Wymaga człowieka** — recenzja partnera/liaisona zgodnie z
   `docs/hackathon/06-workflow-pakietu-i-pr.md`, następnie synchronizacja do
   `openspec/specs/notification-inbox-emails` i archiwizacja zmiany

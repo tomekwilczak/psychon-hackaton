@@ -348,7 +348,7 @@ to część **H08b**, sekcja 9 domyka oba w jednym PR-ze.
       pozycja zostaje otwarta.
 - [x] 9.4 Odhaczyć pozostałe zadania sekcji 7–8 z notatkami o odstępstwach; weryfikacja:
       żadne `- [ ]` nie zostaje bez wyjaśnienia.
-- [ ] 9.5 Zarchiwizować zmianę **komendą OpenSpec**, nie ręcznym przenoszeniem katalogów
+- [x] 9.5 Zarchiwizować zmianę **komendą OpenSpec**, nie ręcznym przenoszeniem katalogów
       (workflow §4); pliki archiwizacji trafiają do tego samego commita co implementacja;
       weryfikacja: katalog wylądował w `openspec/changes/archive/` i zmiana jest spójna.
 - [x] 9.6 Bramki końcowe: pełny `php artisan test`, `./vendor/bin/pint`,
