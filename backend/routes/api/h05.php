@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\V1\CourseController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Pakiet H05 · Katalog kursów i sekwencyjne odblokowanie
@@ -13,3 +16,10 @@
 |
 | Contract: docs/hackathon/02-kontrakt-api.md · flag: config('features.h05')
 */
+
+if (config('features.h05')) {
+    Route::middleware(['auth:sanctum', 'access.active'])->group(function (): void {
+        Route::get('/courses', [CourseController::class, 'index']);
+        Route::get('/courses/{slug}', [CourseController::class, 'show']);
+    });
+}
