@@ -254,7 +254,7 @@ flowchart LR
   end
   subgraph TE["Tor E · treści i ludzie"]
     direction LR
-    E0["H08a"]:::todo --> E1["H08b"]:::todo --> E2["H09"]:::done --> E3["H17"]:::done
+    E0["H08a"]:::done --> E1["H08b"]:::done --> E2["H09"]:::done --> E3["H17"]:::done
   end
   subgraph TF["Tor F · dokumenty"]
     direction LR
@@ -263,9 +263,10 @@ flowchart LR
 ```
 
 Stan wg `openspec/changes/koordynacja-pakietow-h01-h21/tasks.md` (2026-08-28, po scaleniu H20,
-H17, H09 i H07): `DONE`/`REVIEW` → zielony, `W TOKU` → żółty, `GOTOWE` (nieodebrany) i
-`BLOCKED` → czerwony. Nie ma już pakietu żółtego; jedyny niezielony ciąg to H08a/H08b, bo H08
-wciąż nie ma właściciela na tablicy.
+H17, H09, H07 i H08): `DONE`/`REVIEW` → zielony, `W TOKU` → żółty, `GOTOWE` (nieodebrany) i
+`BLOCKED` → czerwony. Wszystkie sześć torów jest zielonych — każdy pakiet H01–H21 jest scalony
+albo czeka na review. Otwarte pozostają bramki kontraktowe K1–K12 dla H08 i H09; nie zmieniają
+kolorów, bo dotyczą potwierdzenia tras, nie dowiezienia zakresu.
 
 Uwaga do torów A i E: strzałka `H21 → H01 → H05` nie jest blokadą techniczną, tylko
 **kolejnością zwrotu z inwestycji** — H21 i H19 to pakiety S, dowożone w kilka godzin,
