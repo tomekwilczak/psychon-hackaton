@@ -2,6 +2,9 @@
 
 namespace Tests\Feature\PermissionMatrix;
 
+use App\Models\SupervisionSlot;
+use App\Models\SupervisorAssignment;
+use App\Models\User;
 use App\Support\Notify;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
@@ -20,9 +23,8 @@ use Tests\TestCase;
  * H21…) dopisują swoje wiersze, gdy ich trasy wylądują na `main`.
  *
  * `matrix_5a`–`matrix_5f` odpowiadają wymaganym testom z
- * docs/system/03-role-i-uprawnienia.md §5. (d) i (e) zależą od pakietów,
- * które jeszcze nie istnieją (H04, H12) — `skipped` z odwołaniem, do czasu
- * ich powstania.
+ * docs/system/03-role-i-uprawnienia.md §5. (d) i (e) czekały wcześniej na
+ * H04 i H12 — oba pakiety są scalone, więc oba wiersze są egzekwowane.
  */
 class PermissionMatrixTest extends TestCase
 {
@@ -151,30 +153,86 @@ class PermissionMatrixTest extends TestCase
     }
 
     /**
-     * §5(d) — wygaśnięcie dostępu blokuje materiały, ale nie logowanie ani
-     * eksport RODO. Zależy od H04 (middleware `access.active`), który
-     * jeszcze nie istnieje (tasks.md: GOTOWE, nieprzypisany).
+     * §5(d) — wygaśnięcie dostępu blokuje treści programu (403
+     * `access_expired`), ale nie logowanie ani eksport RODO. Pełną listę tras
+     * bramkowanych i zwolnionych pokrywa `AccessExpiry\AccessExpiryEnforcementTest`
+     * (H04); tutaj zostaje sam wiersz §5(d) matrycy.
      */
     #[Test]
     public function matrix_5d(): void
     {
-        $this->markTestSkipped('Zależy od H04 (dostęp czasowy) — pakiet jeszcze nie powstał.');
+        $this->actingAsRole('volunteer', ['access_expires_at' => now()->subDay()]);
+
+        $this->getJson('/api/v1/internship/entries')
+            ->assertStatus(403)
+            ->assertJsonPath('error.code', 'access_expired');
+
+        $this->getJson('/api/v1/me')->assertOk();
+        $this->postJson('/api/v1/me/exports')->assertStatus(202);
+
+        $expired = User::factory()->create([
+            'password' => 'demo1234',
+            'access_expires_at' => now()->subYear(),
+        ]);
+
+        $this->postJson('/api/v1/auth/login', [
+            'email' => $expired->email,
+            'password' => 'demo1234',
+        ])->assertOk();
     }
 
     /**
-     * §5(e) — prowadzący nie widzi grupy innego prowadzącego. Zależy od H12
-     * (superwizja / przypisania grupy), który jeszcze nie istnieje
-     * (tasks.md: GOTOWE, nieprzypisany).
+     * §5(e) — prowadzący nie widzi grupy innego prowadzącego: `/instructor/group`
+     * zwraca wyłącznie własnych podopiecznych i własne terminy, a cudzy termin
+     * jest dla niego nieodróżnialny od nieistniejącego (kontrakt §1.1: 404, nie
+     * ujawniamy istnienia — ta sama reguła co `matrix_5b`).
      */
     #[Test]
     public function matrix_5e(): void
     {
-        $this->markTestSkipped('Zależy od H12 (superwizja / grupy prowadzących) — pakiet jeszcze nie powstał.');
+        $instructor = $this->actingAsRole('instructor');
+        $otherInstructor = User::factory()->create(['role' => 'instructor']);
+
+        $ownMember = User::factory()->create(['role' => 'volunteer']);
+        $foreignMember = User::factory()->create(['role' => 'volunteer']);
+
+        foreach ([[$ownMember, $instructor], [$foreignMember, $otherInstructor]] as [$volunteer, $supervisor]) {
+            SupervisorAssignment::create([
+                'volunteer_id' => $volunteer->id,
+                'supervisor_id' => $supervisor->id,
+                'assigned_at' => now(),
+            ]);
+        }
+
+        $foreignSlot = SupervisionSlot::create([
+            'supervisor_id' => $otherInstructor->id,
+            'starts_at' => now()->subDays(2),
+            'duration_minutes' => 90,
+            'seats_limit' => 3,
+            'location_or_link' => 'Sala demo',
+        ]);
+
+        $this->getJson('/api/v1/instructor/group')
+            ->assertOk()
+            ->assertJsonCount(1, 'data.members')
+            ->assertJsonPath('data.members.0.id', $ownMember->id)
+            ->assertJsonCount(0, 'data.slots');
+
+        $this->patchJson("/api/v1/instructor/slots/{$foreignSlot->id}/attendance", [
+            'attendance' => [(string) $foreignMember->id => 'present'],
+        ])
+            ->assertStatus(404)
+            ->assertJsonPath('error.code', 'not_found');
     }
 
     /**
      * §5(f) — nikt nie modyfikuje dziennika działań. Kontrakt: „Trasy
      * modyfikacji audytu nie istnieją (próba → 404)."
+     *
+     * Testujemy wyłącznie podścieżki z id (`/admin/audit/1`) — od H20
+     * `GET /admin/audit` (bez id) jest prawdziwą, zarejestrowaną trasą, więc
+     * `POST` pod ten sam adres trafia w 405 (zła metoda), nie 404 (brak
+     * trasy). To nie jest przypadek objęty tym kryterium.
      */
     #[Test]
     public function matrix_5f(): void
@@ -182,7 +240,7 @@ class PermissionMatrixTest extends TestCase
         $this->actingAsRole('super_admin');
 
         foreach ([
-            ['POST', '/api/v1/admin/audit'],
+            ['POST', '/api/v1/admin/audit/1'],
             ['PATCH', '/api/v1/admin/audit/1'],
             ['DELETE', '/api/v1/admin/audit/1'],
         ] as [$method, $uri]) {

@@ -5,6 +5,7 @@ const entry: MenuEntry = {
   label: "Dziennik stażu",
   href: "/panel/staz",
   order: 30,
+  icon: "clipboard-list",
 };
 
 export default entry;

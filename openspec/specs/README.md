@@ -58,13 +58,12 @@ zmiany, nazwa poniżej to propozycja do zaakceptowania przy starcie pakietu.
 | `instructor-questions` | H17 | proponowana | routing wg dziedziczenia, odpowiedź, izolacja |
 | `participant-accounts-directory` | H18 | proponowana | lista, filtr/szukaj, tworzenie/edycja/blokada, CSV |
 | `participant-record-card` | H18 | proponowana | karta osoby — kształt z kontraktu, jeden agregator |
-| `cohort-report` | H20 | proponowana | raport edycji + eksport CSV |
-| `audit-log-viewer` | H20 | proponowana | dziennik działań, filtry po slugach §3.2, zero tras zapisu |
+| `reports-and-audit-log` | H20 | **merged** (`h20-raporty-i-dziennik`) | raport edycji + eksport CSV; dziennik działań, filtry po slugach §3.2, zero tras zapisu |
 
-31 zdolności na 21 pakietów. Pakiety jednozdolnościowe: H01 (wyjątkowo dwie — profil i
+30 zdolności na 21 pakietów. Pakiety jednozdolnościowe: H01 (wyjątkowo dwie — profil i
 eksport mają zupełnie inny cykl życia, patrz niżej), H02, H03, H04, H05, H07, H13,
-H14, H15, H17, H21. Pakiety dwuzdolnościowe: H01, H09, H10, H12 (współdzielona z H18),
-H16, H18, H19, H20. Pakiet H08 dzielony już na poziomie karty zadania (H08a/H08b) —
+H14, H15, H17, H20, H21. Pakiety dwuzdolnościowe: H01, H09, H10, H12 (współdzielona
+z H18), H16, H18, H19. Pakiet H08 dzielony już na poziomie karty zadania (H08a/H08b) —
 tu każdy sub-pakiet dodatkowo rozbity, bo `lesson-materials` i `course-invitations`
 mają zupełnie inne wejścia (plik vs e-mail) mimo wspólnego slotu w `#/admin/kursy`.
 
@@ -90,15 +89,19 @@ mają zupełnie inne wejścia (plik vs e-mail) mimo wspólnego slotu w `#/admin/
 - **H18 → dwie zdolności.** `participant-accounts-directory` (lista, CRUD konta,
   blokada, CSV) to co innego niż `participant-record-card` (jeden GET, kompozycja z
   `ProgressAggregator` — ta sama zdolność koncepcyjnie co liczby w `admin-dashboard`,
-  `cohort-report` i warunkach certyfikatu, tylko inny kontekst wyświetlenia).
-- **H20 → dwie zdolności**, 1:1 z dwoma ekranami (`#/admin/raport` vs
-  `#/admin/dziennik`) i dwoma tabelami źródłowymi — raport to agregaty, dziennik to
-  surowy odczyt `audit_log`.
+  `reports-and-audit-log` i warunkach certyfikatu, tylko inny kontekst wyświetlenia).
+- **H20 → jedna zdolność `reports-and-audit-log`.** Mapa proponowała tu podział 1:1 z
+  dwoma ekranami (`cohort-report` dla `#/admin/raport`, `audit-log-viewer` dla
+  `#/admin/dziennik`) i dwoma tabelami źródłowymi. Pakiet przy starcie przyjął jedną
+  zdolność — oba ekrany dzielą rolę (`project_manager`/`super_admin`), wspólny helper
+  CSV i ten sam zestaw kryteriów odbioru, a rozdzielenie dawałoby dwa specy czytane
+  zawsze razem. Nazwy z mapy były propozycją do zaakceptowania przy starcie pakietu
+  (patrz „Konwencja nazewnictwa"), więc wiążąca jest nazwa ze zmiany.
 
 ## Zdolności żniwne (dojrzewają późno, patrz §5c dokumentu zależności)
 
 `time-limited-access` (H04), `permission-matrix-testkit` (H02),
-`cohort-report`/`audit-log-viewer` (H20) i `documents` (H14) mają specs, które prawdo­
+`reports-and-audit-log` (H20) i `documents` (H14) mają specs, które prawdo­
 podobnie dostaną drugą rundę `ADDED`/`MODIFIED Requirements` już po pierwszym mergu —
 ich kompletność zależy od tego, ile innych pakietów wyemitowało zdarzenia/trasy do
 pokrycia. To nie błąd planowania, tylko naturalna kolejność w falach z §6.2.

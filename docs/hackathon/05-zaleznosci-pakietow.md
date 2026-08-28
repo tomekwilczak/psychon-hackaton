@@ -242,7 +242,7 @@ flowchart LR
   end
   subgraph TB["Tor B · administracja"]
     direction LR
-    B0["H19"]:::done --> B1["H18"]:::done --> B2["H03"]:::done --> B3["H20"]:::todo
+    B0["H19"]:::done --> B1["H18"]:::done --> B2["H03"]:::done --> B3["H20"]:::done
   end
   subgraph TC["Tor C · szyna i uprawnienia"]
     direction LR
@@ -250,11 +250,11 @@ flowchart LR
   end
   subgraph TD["Tor D · program poza kursami"]
     direction LR
-    D0["H11"]:::done --> D1["H12"]:::done --> D2["H07"]:::wip
+    D0["H11"]:::done --> D1["H12"]:::done --> D2["H07"]:::done
   end
   subgraph TE["Tor E · treści i ludzie"]
     direction LR
-    E0["H08a"]:::todo --> E1["H08b"]:::todo --> E2["H09"]:::todo --> E3["H17"]:::todo
+    E0["H08a"]:::done --> E1["H08b"]:::done --> E2["H09"]:::done --> E3["H17"]:::done
   end
   subgraph TF["Tor F · dokumenty"]
     direction LR
@@ -262,9 +262,11 @@ flowchart LR
   end
 ```
 
-Stan wg `openspec/changes/koordynacja-pakietow-h01-h21/tasks.md` (2026-08-28, po synchronizacji
-H07/H15/H18): `DONE`/`REVIEW` → zielony, `W TOKU` → żółty, `GOTOWE` (nieodebrany) i `BLOCKED` →
-czerwony.
+Stan wg `openspec/changes/koordynacja-pakietow-h01-h21/tasks.md` (2026-08-28, po scaleniu H20,
+H17, H09, H07 i H08): `DONE`/`REVIEW` → zielony, `W TOKU` → żółty, `GOTOWE` (nieodebrany) i
+`BLOCKED` → czerwony. Wszystkie sześć torów jest zielonych — każdy pakiet H01–H21 jest scalony
+albo czeka na review. Otwarte pozostają bramki kontraktowe K1–K12 dla H08 i H09; nie zmieniają
+kolorów, bo dotyczą potwierdzenia tras, nie dowiezienia zakresu.
 
 Uwaga do torów A i E: strzałka `H21 → H01 → H05` nie jest blokadą techniczną, tylko
 **kolejnością zwrotu z inwestycji** — H21 i H19 to pakiety S, dowożone w kilka godzin,

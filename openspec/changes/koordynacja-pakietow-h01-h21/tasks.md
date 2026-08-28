@@ -30,10 +30,10 @@
 ## 4. Fala P0.5 i P1
 
 - [x] 4.1 H03 — Rekrutacja i kolejka zgłoszeń · Właściciel: `Mikołaj` · Status: `DONE` (PR #33 scalony); weryfikacja: kryteria akceptacji i testy H03 przechodzą, istnieje `DEMO/H03.md`.
-- [ ] 4.2 H04 — Dostęp czasowy · Właściciel: `Irek` · Status: `REVIEW`; weryfikacja: kryteria akceptacji i testy H04 przechodzą, istnieje `DEMO/H04.md`.
-- [ ] 4.3 H07 — Pomiar czasu nauki i rzetelność · Właściciel: `Mikołaj` · Status: `W TOKU`; weryfikacja: kryteria akceptacji i testy H07 przechodzą, istnieje `DEMO/H07.md`.
+- [x] 4.2 H04 — Dostęp czasowy · Właściciel: `Irek` · Status: `DONE` (PR #20 scalony); weryfikacja: kryteria akceptacji i testy H04 przechodzą, istnieje `DEMO/H04.md`.
+- [x] 4.3 H07 — Pomiar czasu nauki i rzetelność · Właściciel: `Mikołaj` · Status: `DONE` (PR #49 scalony); weryfikacja: kryteria akceptacji i testy H07 przechodzą, istnieje `DEMO/H07.md`.
 - [ ] 4.4 H08 — CMS treści · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: uzgodniona część H08a/H08b oraz jej testy przechodzą, istnieje `DEMO/H08.md` z jawnym zakresem.
-- [ ] 4.5 H09 — Wizytówki i przypisania prowadzących · Właściciel: `Tomek` · Status: `W TOKU`; weryfikacja: kryteria akceptacji i testy H09 przechodzą, istnieje `DEMO/H09.md`.
+- [ ] 4.5 H09 — Wizytówki i przypisania prowadzących · Właściciel: `Tomek` · Status: `REVIEW` (gałąź `pakiet/H09-prowadzacy-wizytowki-przypisania`, zakres: backend + OpenSpec; frontend w kolejnej rundzie); weryfikacja: kryteria akceptacji i testy H09 przechodzą (412 backend), istnieje `DEMO/H09.md`; otwarte: K1–K12 do potwierdzenia przez strażnika kontraktu (`DEMO/H9-prep-doc.md` §6).
 - [x] 4.6 H11 — Dziennik stażu i akceptacje · Właściciel: `Mikołaj` · Status: `DONE`; weryfikacja: kryteria akceptacji i testy H11 przechodzą, istnieje `DEMO/H11.md`.
 - [x] 4.7 H12 — Superwizje, zapisy i obecności · Właściciel: `Mikołaj` · Status: `DONE`; weryfikacja: kryteria akceptacji i testy H12 przechodzą, istnieje `DEMO/H12.md`.
 - [x] 4.8 H13 — Pełny zakres certyfikatów i publicznej weryfikacji · Właściciel: `Tomek` · Status: `DONE` (PR #10 — wraz z minimum ★ z 3.6); weryfikacja: wszystkie kryteria H13 przechodzą, `DEMO/H13.md` opisuje pełny scenariusz.
@@ -43,8 +43,8 @@
 
 - [x] 5.1 H14 — Dokumenty generowane z profilu · Właściciel: `Błażej` · Status: `DONE`; weryfikacja: kryteria akceptacji i testy H14 przechodzą, istnieje `DEMO/H14.md`.
 - [ ] 5.2 H15 — Profil psychologa · Właściciel: `Błażej` · Status: `REVIEW` (PR #29); weryfikacja: kryteria akceptacji i testy H15 przechodzą, istnieje `DEMO/H15.md`.
-- [ ] 5.3 H17 — Pytania do prowadzącego · Właściciel: `Błażej` · Status: `W TOKU`; weryfikacja: kryteria akceptacji i testy H17 przechodzą, istnieje `DEMO/H17.md`.
-- [ ] 5.4 H20 — Raporty i dziennik działań · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: kryteria akceptacji i testy H20 przechodzą, istnieje `DEMO/H20.md`.
+- [ ] 5.3 H17 — Pytania do prowadzącego · Właściciel: `Błażej` · Status: `REVIEW` (PR #44); weryfikacja: kryteria akceptacji i testy H17 przechodzą, istnieje `DEMO/H17.md`.
+- [ ] 5.4 H20 — Raporty i dziennik działań · Właściciel: `Irek` · Status: `REVIEW`; weryfikacja: kryteria akceptacji i testy H20 przechodzą, istnieje `DEMO/H20.md`.
 
 ## 6. Integracja i przekazanie
 
