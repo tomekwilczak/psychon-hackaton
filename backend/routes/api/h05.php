@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\CourseController;
+use App\Http\Controllers\Api\V1\MaterialDownloadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,4 +23,11 @@ if (config('features.h05')) {
         Route::get('/courses', [CourseController::class, 'index']);
         Route::get('/courses/{slug}', [CourseController::class, 'show']);
     });
+
+    // Browser-initiated download: no Authorization header, so the temporary
+    // signature carries the authorization instead. Whitelisted in
+    // config/public_routes.php with the contract guardian's approval.
+    Route::middleware('signed')
+        ->get('/materials/{material}/download', MaterialDownloadController::class)
+        ->name('materials.download');
 }

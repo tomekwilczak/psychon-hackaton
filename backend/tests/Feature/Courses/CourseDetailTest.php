@@ -54,7 +54,17 @@ class CourseDetailTest extends TestCase
 
         $this->assertSame(['id', 'name', 'download_url'], array_keys($data['materials'][0]));
         $this->assertSame('Karta pracy — Wywiad psychologiczny.pdf', $data['materials'][0]['name']);
-        $this->assertNull($data['materials'][0]['download_url']); // signed link lands in phase 3
+
+        // Contract §2: „<podpisany, wygasa>" — the link must carry both.
+        $link = $data['materials'][0]['download_url'];
+        $this->assertStringContainsString(
+            "/api/v1/materials/{$data['materials'][0]['id']}/download",
+            $link,
+        );
+        parse_str((string) parse_url($link, PHP_URL_QUERY), $query);
+        $this->assertArrayHasKey('signature', $query);
+        $this->assertArrayHasKey('expires', $query);
+        $this->assertSame((string) $this->user('marta@demo.pl')->id, $query['u']);
     }
 
     public function test_materials_include_uploads_attached_to_a_lesson(): void

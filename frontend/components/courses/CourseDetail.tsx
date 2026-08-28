@@ -5,6 +5,7 @@ import Card from "@/components/ui/Card";
 import ProgressBar from "@/components/ui/ProgressBar";
 import {
   COURSE_STATUS_BADGE,
+  fileKindLabel,
   stageLabel,
   type CourseDetail as CourseDetailData,
 } from "@/lib/courses";
@@ -82,33 +83,30 @@ export default function CourseDetail({ course }: CourseDetailProps) {
           <ul className="flex flex-col gap-1">
             {course.materials.map((material) => (
               <li key={material.id}>
-                {material.download_url ? (
-                  <a
-                    href={material.download_url}
-                    download
-                    className="inline-flex min-h-11 items-center gap-2 text-body font-medium text-accent transition-colors duration-200 hover:text-accent-dark focus-visible:focus-ring"
+                <a
+                  href={material.download_url}
+                  download
+                  className="inline-flex min-h-11 items-center gap-2 text-body font-medium text-accent transition-colors duration-200 hover:text-accent-dark focus-visible:focus-ring"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="size-4 shrink-0"
+                    aria-hidden="true"
                   >
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="size-4 shrink-0"
-                      aria-hidden="true"
-                    >
-                      <path d="M12 3v12" />
-                      <path d="m7 12 5 5 5-5" />
-                      <path d="M5 21h14" />
-                    </svg>
-                    {material.name}
-                  </a>
-                ) : (
-                  <p className="flex min-h-11 items-center text-body text-muted">
-                    {material.name}
-                  </p>
-                )}
+                    <path d="M12 3v12" />
+                    <path d="m7 12 5 5 5-5" />
+                    <path d="M5 21h14" />
+                  </svg>
+                  {material.name}
+                  <span className="text-caption font-medium text-muted">
+                    {fileKindLabel(material.name)}
+                  </span>
+                </a>
               </li>
             ))}
           </ul>

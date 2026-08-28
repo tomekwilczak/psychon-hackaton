@@ -30,8 +30,8 @@ export interface LessonSummary {
 export interface CourseMaterial {
   id: number;
   name: string;
-  /** Podpisany, wygasający link — wypełnia go faza 3 pakietu. */
-  download_url: string | null;
+  /** Podpisany link ważny 15 minut — kontrakt §2 „podpisany, wygasa". */
+  download_url: string;
 }
 
 export interface CourseInstructor {
@@ -75,6 +75,17 @@ export function formatDuration(seconds: number | null): string {
   if (minutes === 0) return `${hours} godz.`;
 
   return `${hours} godz. ${minutes} min`;
+}
+
+/**
+ * Rodzaj pliku czytelny dla człowieka, wyprowadzony z nazwy. Kontrakt §2
+ * nie przewiduje w materiale pola `size`, więc rozmiaru nie pokazujemy —
+ * rozszerzenie jest jedyną informacją o pliku, którą mamy po stronie klienta.
+ */
+export function fileKindLabel(name: string): string {
+  const extension = name.includes(".") ? name.split(".").pop() : undefined;
+
+  return extension ? `Plik ${extension.toUpperCase()}` : "Plik do pobrania";
 }
 
 export function fetchCourses(
