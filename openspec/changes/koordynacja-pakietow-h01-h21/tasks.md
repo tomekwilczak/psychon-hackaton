@@ -22,7 +22,7 @@
 - [x] 3.5 H10 — Testy wiedzy i warsztat · Właściciel: `Tomek` · Status: `DONE`; weryfikacja: kryteria ★ i testy H10 przechodzą, istnieje `DEMO/H10.md`.
 - [x] 3.6 H13★ — Minimum certyfikatu i warunków ukończenia · Właściciel: `Tomek` · Status: `DONE` (PR #10); weryfikacja: kryteria oznaczone ★ w H13 przechodzą, istnieje sekcja minimum w `DEMO/H13.md`.
 - [x] 3.7 H16 — Powiadomienia, dzwonek i e-maile symulowane · Właściciel: `Irek` · Status: `DONE`; weryfikacja: kryteria ★ i testy H16 przechodzą, wiadomości trafiają wyłącznie do Mailpit, istnieje `DEMO/H16.md`.
-- [ ] 3.8 H18 — Panel osób i karta osoby · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: kryteria ★ i testy H18 przechodzą, istnieje `DEMO/H18.md`.
+- [ ] 3.8 H18 — Panel osób i karta osoby · Właściciel: `Tomek` · Status: `REVIEW` (PR #27); weryfikacja: kryteria ★ i testy H18 przechodzą, istnieje `DEMO/H18.md`.
 - [x] 3.9 H19 — Pulpit administracyjny i ustawienia edycji · Właściciel: `Błażej` · Status: `DONE`; weryfikacja: kryteria ★ i testy H19 przechodzą, istnieje `DEMO/H19.md`.
 - [x] 3.10 H21 — Onboarding „Zacznij tutaj” · Właściciel: `Tomek` · Status: `DONE`; weryfikacja: kryteria ★ i testy H21 przechodzą, istnieje `DEMO/H21.md`.
 - [ ] 3.11 Przeprowadzić wspólną ścieżkę P0 na danych demo; weryfikacja: logowanie → kurs → lekcja → test → powiadomienie → warunki certyfikatu → panel administracji działa bez ręcznej zmiany danych.
