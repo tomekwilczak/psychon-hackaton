@@ -17,7 +17,7 @@
 
 - [x] 3.1 H01 — Profil użytkownika i eksport RODO · Właściciel: `Tomek` · Status: `DONE`; weryfikacja: kryteria ★ i testy H01 przechodzą, istnieje `DEMO/H01.md`.
 - [x] 3.2 H02 — Uprawnienia i test-kit matrycy · Właściciel: `Irek` · Status: `DONE` (PR #8 scalony; przejęte po `Błażej` — porzucone); weryfikacja: kryteria ★ i testy H02 przechodzą, istnieje `DEMO/H02.md`.
-- [ ] 3.3 H05 — Katalog kursów i sekwencyjne odblokowanie · Właściciel: `Mariusz` · Status: `W TOKU`; weryfikacja: kryteria ★ i testy H05 przechodzą, istnieje `DEMO/H05.md`.
+- [x] 3.3 H05 — Katalog kursów i sekwencyjne odblokowanie · Właściciel: `Mariusz` · Status: `DONE` (PR #15 scalony); weryfikacja: kryteria ★ i testy H05 przechodzą, istnieje `DEMO/H05.md`.
 - [x] 3.4 H06 — Lekcja, odtwarzacz i postęp · Właściciel: `Mikołaj` · Status: `DONE`; weryfikacja: kryteria ★ i testy H06 przechodzą, istnieje `DEMO/H06.md`.
 - [x] 3.5 H10 — Testy wiedzy i warsztat · Właściciel: `Tomek` · Status: `DONE`; weryfikacja: kryteria ★ i testy H10 przechodzą, istnieje `DEMO/H10.md`.
 - [x] 3.6 H13★ — Minimum certyfikatu i warunków ukończenia · Właściciel: `Tomek` · Status: `DONE` (PR #10); weryfikacja: kryteria oznaczone ★ w H13 przechodzą, istnieje sekcja minimum w `DEMO/H13.md`.
