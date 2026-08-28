@@ -64,6 +64,6 @@
 - [ ] 7.2 Przycisk „przedłuż dostęp" w karcie osoby — endpoint gotowy i przetestowany
   (`POST /admin/users/{id}/extend-access`); UI należy do H18 (`GOTOWE`/nieprzypisany
   w chwili tego backfillu), gdy pakiet ruszy
-- [ ] 7.3 Odblokowanie `matrix_5d`/`matrix_5e` w
+- [x] 7.3 Odblokowanie `matrix_5d`/`matrix_5e` w
   `backend/tests/Feature/PermissionMatrix/PermissionMatrixTest.php` (H02) — nie były
   już `skipped` z braku pakietu H04, ale zmiana pliku należy do właściciela H02

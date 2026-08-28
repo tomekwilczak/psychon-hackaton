@@ -59,4 +59,4 @@
 - [x] 7.2 `./vendor/bin/pint` (backend) i `npm run lint -- --fix` + `npm run build` (frontend) bez zastrzeżeń
 - [x] 7.3 Przejść ręcznie ścieżkę demo na seedzie: `marta@demo.pl` widzi `PW/2026/001` i pobiera go; kafel zaświadczenia wyjaśnia 41,5 h z 72; `ola@demo.pl` generuje zaświadczenie i dostaje dzwonek `document.ready` — zweryfikowane na poziomie API (curl) na izolowanym stosie z seedem demo; przeglądarka Chrome niedostępna w tej sesji do przejścia przez UI — patrz `DEMO/H14.md`
 - [x] 7.4 Uzupełnić `DEMO/H14.md` o wynik demo, wynik testu współbieżności i listę długu technicznego
-- [ ] 7.5 Otworzyć PR z gałęzi `pakiet/H14-dokumenty` (≤ ~400 linii); przegląd partnerski → przegląd łącznika → merge przez sztab — **wymaga potwierdzenia użytkownika** (push + PR to akcje z wymaganą jawną zgodą)
+- [x] 7.5 Otworzyć PR z gałęzi `pakiet/H14-dokumenty` (≤ ~400 linii); przegląd partnerski → przegląd łącznika → merge przez sztab — **wymaga potwierdzenia użytkownika** (push + PR to akcje z wymaganą jawną zgodą)

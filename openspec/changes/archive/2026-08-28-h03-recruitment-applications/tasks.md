@@ -83,7 +83,7 @@
 
 ## 10. Bramki jakości i kontrola zakresu
 
-- [ ] 10.1 Uruchomić Pint dla backendu i sprawdzić brak zmian formatowania poza H03; weryfikacja: `cd backend && ./vendor/bin/pint` kończy się kodem 0, a diff nie obejmuje cudzych plików.
+- [x] 10.1 Uruchomić Pint dla backendu i sprawdzić brak zmian formatowania poza H03; weryfikacja: `cd backend && ./vendor/bin/pint` kończy się kodem 0, a diff nie obejmuje cudzych plików.
 - [x] 10.2 Uruchomić testy H03 oraz pełny backend; weryfikacja: `php artisan test --filter=H03` (27) i pełny backend (313, 2 skip) kończą się kodem 0.
 - [x] 10.3 Uruchomić frontend lint i build; weryfikacja: `cd frontend && npm run lint` oraz `npm run build` kończą się kodem 0 bez nowych zależności.
 - [x] 10.4 Uruchomić `git diff --check` oraz audyt zakresu plików; weryfikacja: brak błędów whitespace, zmian migracji, compose, lockfile, fasad, `UserResource`, `/me`, cudzych tras, layoutów, menu registry i strony H18.

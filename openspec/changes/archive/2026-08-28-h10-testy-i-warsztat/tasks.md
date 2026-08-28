@@ -100,7 +100,7 @@
 - [x] 7.3 Uzupełnić `DEMO/H10.md` o tabelę kryterium→test, ścieżkę demo na
       seedzie (marta: test 1 zdany, test 2 — 1/3 podejść) i listę świadomych
       braków (panel banku pytań w UI, zależność od H08a)
-- [ ] 7.4 Otworzyć PR z gałęzi `pakiet/H10-testy-warsztat` (≤ ~400 linii —
+- [x] 7.4 Otworzyć PR z gałęzi `pakiet/H10-testy-warsztat` (≤ ~400 linii —
       pakiet przekracza ten rozmiar ze względu na klasę L; do odnotowania przy
       przeglądzie); przegląd partnerski → przegląd łącznika → merge przez
       sztab — **wymaga potwierdzenia użytkownika** (push + PR to akcje z

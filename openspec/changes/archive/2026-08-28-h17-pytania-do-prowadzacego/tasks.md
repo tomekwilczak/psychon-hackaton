@@ -85,7 +85,7 @@
 - [x] 6.1 Funkcje API w `frontend/lib/questions.ts` (lista z filtrem i paginacją,
   odpowiedź) wraz z typami; weryfikacja: `npm run lint` i `npx tsc --noEmit`
   przechodzą.
-- [ ] 6.2 Strona `app/(prowadzacy)/prowadzacy/pytania/page.tsx` — lista pytań,
+- [x] 6.2 Strona `app/(prowadzacy)/prowadzacy/pytania/page.tsx` — lista pytań,
   przełącznik „tylko nieodpowiedziane", formularz odpowiedzi, stany pusty / ładowania
   / błędu; weryfikacja: ręczny scenariusz z `DEMO/H17.md` na koncie
   `joanna@demo.pl`.
@@ -104,7 +104,7 @@
 - [x] 7.2 Osadzić komponent jako slot na stronie kursu `#/panel/kursy/:slug` bez
   przepisywania widoku H05; weryfikacja: diff w plikach H05 ogranicza się do
   osadzenia slotu.
-- [ ] 7.3 Obsłużyć na froncie `403 course_locked` i brak adresata (komunikat po
+- [x] 7.3 Obsłużyć na froncie `403 course_locked` i brak adresata (komunikat po
   polsku, bez błędu technicznego); weryfikacja: ręczny scenariusz na kursie 3
   (zablokowanym) w `DEMO/H17.md`.
 
