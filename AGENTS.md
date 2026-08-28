@@ -31,6 +31,15 @@ The shared source of truth for H01–H21 ownership and status is
 - After a board update lands on `main`, rebase or merge the current `origin/main` into the
   package branch before continuing implementation.
 
+## Mandatory package workflow
+
+Before starting a package branch and again before closing its OpenSpec change, committing,
+pushing, or opening a Pull Request, follow
+@docs/hackathon/06-workflow-pakietu-i-pr.md. Its repository safety rules are mandatory:
+package work goes only to `origin` on `pakiet/HXX-nazwa`; never push to `upstream` or
+directly to `origin/main`, never create a PR without the explicit repository, and never
+merge your own package PR.
+
 ## Build, Test, and Development Commands
 
 - `bash scripts/setup.sh` (Windows: `scripts\setup.ps1`) — full environment; then `cd frontend && npm run dev`. Frontend :3000, API :8000, Mailpit :8025.
@@ -50,4 +59,4 @@ Base path `/api/v1`, Sanctum Bearer auth, responses always wrapped in `{"data": 
 
 ## Commit & Pull Request Guidelines
 
-Branch `pakiet/HXX-nazwa`; max one open PR per team, ~400 lines max. Flow: partner review → liaison review → staff merge; CI (Pint, PHPUnit, ESLint, build) must pass. No commit-prefix convention is established yet. Document demo results in `DEMO/HXX.md`.
+Branch `pakiet/HXX-nazwa`; max one open PR per team, ~400 lines max. Flow: partner review → liaison review → staff merge; CI (Pint, PHPUnit, ESLint, build) must pass. Package commits use `feat(HXX): opis zmiany`. Document demo results in `DEMO/HXX.md`. The complete closeout and PR checklist is @docs/hackathon/06-workflow-pakietu-i-pr.md.
