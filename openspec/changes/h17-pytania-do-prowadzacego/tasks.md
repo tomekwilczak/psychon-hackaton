@@ -123,7 +123,7 @@
 - [x] 8.5 Zintegrować aktualny `origin/main`, sprawdzić `git diff --check` i
   `git status --short` pod kątem plików spoza zakresu pakietu; weryfikacja: diff
   obejmuje wyłącznie pliki wymienione w `proposal.md` § Impact.
-- [ ] 8.6 Wypchnąć gałąź, otworzyć PR do `origin` i ustawić status H17 na `REVIEW`
+- [x] 8.6 Wypchnąć gałąź, otworzyć PR do `origin` i ustawić status H17 na `REVIEW`
   w `openspec/changes/koordynacja-pakietow-h01-h21/tasks.md` na `main`; weryfikacja:
   status `REVIEW` z numerem PR widoczny na `origin/main`, PR nie jest scalany przez
   autora.
