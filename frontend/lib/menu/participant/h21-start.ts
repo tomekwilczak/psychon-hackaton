@@ -1,6 +1,6 @@
 import type { MenuEntry } from "../types";
 
-/** Placeholder pakietu H21 („Zacznij tutaj"). */
+/** Pakiet H21 — onboarding „Zacznij tutaj". Stała pozycja dla ról uczestniczących. */
 const entry: MenuEntry = {
   label: "Start",
   href: "/panel/start",
