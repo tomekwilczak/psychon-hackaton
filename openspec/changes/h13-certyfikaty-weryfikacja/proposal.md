@@ -34,7 +34,7 @@ weryfikacji — a minimum ★ tego pakietu wchodzi w skład ścieżki demo P0
 
 ### New Capabilities
 
-- `certyfikaty`: warunki ukończenia programu, wydanie certyfikatu absolwenta
+- `certificate-issuance-verification`: warunki ukończenia programu, wydanie certyfikatu absolwenta
   (numeracja per edycja, PDF+QR, snapshot, `program_completed_at`, audyt) oraz
   publiczna weryfikacja autentyczności po numerze i po tokenie QR.
 
