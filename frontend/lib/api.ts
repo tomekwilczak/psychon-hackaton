@@ -8,6 +8,7 @@
  * - koperta błędu: { error: { status, code, message, errors?, reason? } }
  *   → rzucamy typowany ApiError
  * - 401 (poza /auth/login) → czyszczenie tokenu + przekierowanie na /logowanie
+ * - 403 `access_expired` (H04) → przekierowanie na /dostep-wygasl (ekran startera)
  */
 
 export const TOKEN_KEY = "np_token";
@@ -107,9 +108,15 @@ async function request(path: string, options: ApiOptions = {}): Promise<unknown>
     // brak JSON-a (np. 502 z proxy) — obsłużone niżej
   }
 
+  const envelope = json as { error?: Partial<ApiErrorBody> } | null;
+  const err = envelope?.error;
+
+  // 403 access_expired (H04) → wspólny ekran startera "Dostęp wygasł"
+  if (res.status === 403 && err?.code === "access_expired" && typeof window !== "undefined") {
+    window.location.assign(new URL("/dostep-wygasl", window.location.origin));
+  }
+
   if (!res.ok) {
-    const envelope = json as { error?: Partial<ApiErrorBody> } | null;
-    const err = envelope?.error;
     throw new ApiError({
       status: err?.status ?? res.status,
       code: err?.code ?? "unknown_error",
