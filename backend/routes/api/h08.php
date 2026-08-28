@@ -13,3 +13,19 @@
 |
 | Contract: docs/hackathon/02-kontrakt-api.md · flag: config('features.h08')
 */
+
+use App\Http\Controllers\Api\V1\Admin\CourseCatalogAdminController;
+use Illuminate\Support\Facades\Route;
+
+if (! config('features.h08')) {
+    return;
+}
+
+// Bez `access.active` — administracja nie podlega wygaśnięciu dostępu do programu.
+Route::middleware(['auth:sanctum', 'role:project_manager,super_admin'])->group(function (): void {
+    Route::get('/admin/courses', [CourseCatalogAdminController::class, 'index']);
+    Route::post('/admin/courses', [CourseCatalogAdminController::class, 'store']);
+    Route::get('/admin/courses/{course}', [CourseCatalogAdminController::class, 'show'])->whereNumber('course');
+    Route::patch('/admin/courses/{course}', [CourseCatalogAdminController::class, 'update'])->whereNumber('course');
+    Route::delete('/admin/courses/{course}', [CourseCatalogAdminController::class, 'destroy'])->whereNumber('course');
+});
