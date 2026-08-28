@@ -12,6 +12,25 @@ Training platform for Fundacja Niepodzielni's volunteer-psychologist development
 - UI text in Polish, code in English. Secrets only in `.env`. No real personal data — seeds per @docs/hackathon/04-seed-demo.md.
 - Port conflicts: set `NP_APP_PORT`/`NP_DB_PORT`/`NP_MAILPIT_PORT`; never edit compose files.
 
+## Package status coordination
+
+The shared source of truth for H01–H21 ownership and status is
+`openspec/changes/koordynacja-pakietow-h01-h21/tasks.md`.
+
+- Before creating the first OpenSpec artifact or editing code for an HXX package, read the
+  board and confirm that the package is not owned by someone else.
+- Starting work requires setting the package owner and status to `W TOKU`. The update must
+  be visible on `origin/main`; a status left only on a local package branch does not reserve
+  the package. If you cannot update `main` safely, stop and ask the team coordinator.
+- Use only these statuses: `GOTOWE` (unclaimed), `W TOKU` (active work), `REVIEW` (pushed and
+  ready for review), `DONE` (merged and verified), `BLOCKED` (cannot continue). A `BLOCKED`
+  entry must include the concrete reason.
+- Update the board immediately when work moves to `REVIEW`, is merged as `DONE`, becomes
+  `BLOCKED`, or resumes as `W TOKU`. Never change another person's ownership without an
+  explicit team decision.
+- After a board update lands on `main`, rebase or merge the current `origin/main` into the
+  package branch before continuing implementation.
+
 ## Build, Test, and Development Commands
 
 - `bash scripts/setup.sh` (Windows: `scripts\setup.ps1`) — full environment; then `cd frontend && npm run dev`. Frontend :3000, API :8000, Mailpit :8025.
