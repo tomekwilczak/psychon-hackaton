@@ -117,7 +117,7 @@
   odłożone). Weryfikacja: plik kompletny wg wzoru `DEMO/H05.md`.
 - [x] 6.3 `openspec validate h09-prowadzacy-wizytowki-przypisania --strict`.
   Weryfikacja: komenda przechodzi.
-- [ ] 6.4 Zsynchronizować `origin/main` do brancha, `git diff --check`,
+- [x] 6.4 Zsynchronizować `origin/main` do brancha, `git diff --check`,
   `git status --short` bez plików spoza zakresu H09. Weryfikacja: diff obejmuje
   wyłącznie `routes/api/h09.php`, nowe pliki `app/`, testy, `openspec/changes/h09-*`,
-  `DEMO/H09.md`.
+  `DEMO/H09.md`. Wykonane — PR #47 przeszedł CI i został scalony.

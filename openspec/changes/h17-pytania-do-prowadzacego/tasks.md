@@ -114,10 +114,12 @@
   `./vendor/bin/pint`; weryfikacja: oba zielone, wynik wklejony do `DEMO/H17.md`.
 - [x] 8.2 Uruchomić `npm run lint` i `npm run build` we `frontend/`; weryfikacja: oba
   zielone, wynik wklejony do `DEMO/H17.md`.
-- [ ] 8.3 Uzupełnić `DEMO/H17.md` o przejście ręcznego scenariusza (pytanie →
+- [x] 8.3 Uzupełnić `DEMO/H17.md` o przejście ręcznego scenariusza (pytanie →
   dzwonek prowadzącej → odpowiedź → dzwonek uczestniczki → odpowiedź przy lekcji)
   oraz o listę odstępstw, jeśli powstały; weryfikacja: wszystkie trzy kryteria
-  odbioru mają w pliku jednoznaczny wynik.
+  odbioru mają w pliku jednoznaczny wynik. Wykonane — `DEMO/H17.md` §3 ma
+  siedmiokrokową tabelę scenariusza, §4 listę odstępstw. Plik sam odnotowuje, że
+  wizualny przegląd obu ekranów w przeglądarce pozostaje do zrobienia.
 - [x] 8.4 `openspec validate h17-pytania-do-prowadzacego --strict`; weryfikacja:
   komenda kończy się bez błędów.
 - [x] 8.5 Zintegrować aktualny `origin/main`, sprawdzić `git diff --check` i

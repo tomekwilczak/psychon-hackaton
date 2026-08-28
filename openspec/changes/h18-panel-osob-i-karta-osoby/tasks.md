@@ -1,6 +1,6 @@
 ## 1. Koordynacja i przygotowanie
 
-- [ ] 1.1 Ustawić na `origin/main` w `openspec/changes/koordynacja-pakietow-h01-h21/tasks.md` właściciela H18 (`Tomek`) i status `W TOKU` przez osobną gałąź docs + PR; weryfikacja: wpis 3.8 na `origin/main` pokazuje właściciela i `W TOKU`.
+- [x] 1.1 Ustawić na `origin/main` w `openspec/changes/koordynacja-pakietow-h01-h21/tasks.md` właściciela H18 (`Tomek`) i status `W TOKU` przez osobną gałąź docs + PR; weryfikacja: wpis 3.8 na `origin/main` pokazuje właściciela i `W TOKU`. Wykonane gałęzią `docs/board-h18-review` (PR #28, commit `c9ae45e`) — z odstępstwem: claim poszedł od razu na `REVIEW`, nie na `W TOKU`, bo implementacja była już gotowa.
 - [x] 1.2 Utworzyć gałąź `pakiet/H18-panel-osob-i-karta-osoby` z aktualnego `origin/main`; weryfikacja: `git branch --show-current` zwraca tę nazwę, `git log` zawiera claim z 1.1.
 - [ ] 1.3 Zgłosić strażnikowi kontraktu brak typu powiadomienia dla zaproszenia z `POST /admin/users` (Open Question z `design.md`); weryfikacja: wątek zgłoszony, odpowiedź lub jej brak odnotowana w `DEMO/H18.md`.
 - [x] 1.4 Spisać zakres i kryteria ★ H18 w `DEMO/H18.md` na podstawie `docs/hackathon/01-pakiety-zadan.md`, `02-kontrakt-api.md` (§2 H18), `04-seed-demo.md` i makiety `#/admin/uczestniczki`; weryfikacja: plik istnieje z listą czterech kryteriów i scenariuszem ręcznym.
@@ -45,4 +45,4 @@
 - [x] 7.2 Uruchomić `cd frontend && npm run lint -- --fix && npm run build`; weryfikacja: obie komendy kończą się sukcesem.
 - [ ] 7.3 Przejść ręczny scenariusz z `DEMO/H18.md` (filtr+szukajka+CSV, matryca 403 + audyt `user.updated`, karta marty = liczby z seeda, blokada vs wygaśnięcie) i zapisać wyniki w `DEMO/H18.md`; weryfikacja: cztery kryteria odhaczone w pliku.
 - [x] 7.4 `openspec validate h18-panel-osob-i-karta-osoby --strict`; weryfikacja: walidacja bez błędów.
-- [ ] 7.5 Zaktualizować status H18 na `REVIEW` w `openspec/changes/koordynacja-pakietow-h01-h21/tasks.md` na `origin/main`, otworzyć PR z gałęzi `pakiet/H18-panel-osob-i-karta-osoby`; weryfikacja: PR otwarty, CI (Pint, PHPUnit, ESLint, build) zielone, wpis 3.8 pokazuje `REVIEW`.
+- [x] 7.5 Zaktualizować status H18 na `REVIEW` w `openspec/changes/koordynacja-pakietow-h01-h21/tasks.md` na `origin/main`, otworzyć PR z gałęzi `pakiet/H18-panel-osob-i-karta-osoby`; weryfikacja: PR otwarty, CI (Pint, PHPUnit, ESLint, build) zielone, wpis 3.8 pokazuje `REVIEW`. PR #27 otwarty i scalony (`6dcf41e`); wpis 3.8 pokazuje dziś `DONE`.
