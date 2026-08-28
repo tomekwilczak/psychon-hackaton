@@ -364,7 +364,7 @@ MVP hackathonowy — wszystkie typy obsługuje szyna H16; emitują pakiety-wła�
 happy path do demo dzwonka) · `question.asked` `question.answered` (H17) ·
 `internship.accepted` `internship.returned` (H11) · `attempt.failed_final` (H10) ·
 `certificate.ready` (H13) · `document.ready` (H14) · `profile.accepted`
-`profile.returned` (H15) · `export.ready` (H01).
+`profile.returned` `profile.withdrawn` (H15) · `export.ready` (H01).
 Po hackathonie: `access.expiring_30d/7d`, `supervision.reminder`.
 
 ### 3.2 Rejestr zdarzeń audytowych (`AuditLog::record`) — jedyne źródło prawdy
@@ -374,7 +374,8 @@ Po hackathonie: `access.expiring_30d/7d`, `supervision.reminder`.
 `assignment.removed` (H09) · `attempt.finished` `attempts.reset`
 `workshop.completed` (H10) · `internship.accepted` `internship.returned` (H11) ·
 `supervisor.assigned` (H12/H18) · `certificate.issued` (H13) · `document.generated`
-(H14) · `profile.accepted` `profile.returned` (H15) · `user.created` `user.updated`
+(H14) · `profile.accepted` `profile.returned` `profile.withdrawn` (H15) ·
+`user.created` `user.updated`
 `user.blocked` (H18) · `edition.updated` (H19) · `sensitive.viewed`
 (H03/H15 — automatycznie przy wglądzie).
 

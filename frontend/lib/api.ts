@@ -8,6 +8,7 @@
  * - koperta błędu: { error: { status, code, message, errors?, reason? } }
  *   → rzucamy typowany ApiError
  * - 401 (poza /auth/login) → czyszczenie tokenu + przekierowanie na /logowanie
+ * - 403 `access_expired` (H04) → przekierowanie na /dostep-wygasl (ekran startera)
  */
 
 export const TOKEN_KEY = "np_token";
@@ -107,9 +108,15 @@ async function request(path: string, options: ApiOptions = {}): Promise<unknown>
     // brak JSON-a (np. 502 z proxy) — obsłużone niżej
   }
 
+  const envelope = json as { error?: Partial<ApiErrorBody> } | null;
+  const err = envelope?.error;
+
+  // 403 access_expired (H04) → wspólny ekran startera "Dostęp wygasł"
+  if (res.status === 403 && err?.code === "access_expired" && typeof window !== "undefined") {
+    window.location.assign(new URL("/dostep-wygasl", window.location.origin));
+  }
+
   if (!res.ok) {
-    const envelope = json as { error?: Partial<ApiErrorBody> } | null;
-    const err = envelope?.error;
     throw new ApiError({
       status: err?.status ?? res.status,
       code: err?.code ?? "unknown_error",
@@ -216,4 +223,139 @@ export function generateDocument(type: DocumentType): Promise<DocumentDto> {
     method: "POST",
     body: { type },
   });
+}
+
+/* -------------------------------------------------------------------- */
+/* H18 — panel osób i karta osoby                                        */
+/* -------------------------------------------------------------------- */
+
+export type UserRole =
+  | "super_admin"
+  | "project_manager"
+  | "instructor"
+  | "volunteer"
+  | "student";
+
+export type UserStatus = "active" | "blocked";
+
+export interface AdminUserListItem {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  role: UserRole;
+  status: UserStatus;
+  product_group: "psychon" | "dobrostan" | "both";
+  access_expires_at: string | null;
+  program_completed_at: string | null;
+  created_at: string | null;
+}
+
+export interface AdminUserProfile {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  role: UserRole;
+  phone: string | null;
+  pesel: string | null;
+  address: { street: string | null; city: string | null; zip: string | null };
+  access_expires_at: string | null;
+  program_completed_at: string | null;
+  product_group: string;
+}
+
+export interface AdminUserCard {
+  profile: AdminUserProfile;
+  progress: {
+    courses_done: number;
+    courses_total: number;
+    hours_accepted: string;
+    supervision_present: number;
+    workshop_done: boolean;
+  };
+  documents: { id: number; type: string; number: string }[];
+  recent_notifications: {
+    id: number;
+    type: string;
+    title: string;
+    body: string | null;
+    link: string | null;
+    read_at: string | null;
+    created_at: string;
+  }[];
+  audit_entries: {
+    id: number;
+    action: string;
+    actor_id: number | null;
+    details: Record<string, unknown> | null;
+    created_at: string | null;
+  }[];
+}
+
+export interface AdminUserFilters {
+  role?: string;
+  status?: string;
+  search?: string;
+  sort?: string;
+  page?: number;
+  per_page?: number;
+}
+
+function adminUsersQuery(filters: AdminUserFilters): string {
+  const params = new URLSearchParams();
+  if (filters.role) params.set("role", filters.role);
+  if (filters.status) params.set("status", filters.status);
+  if (filters.search) params.set("search", filters.search);
+  if (filters.sort) params.set("sort", filters.sort);
+  if (filters.page) params.set("page", String(filters.page));
+  if (filters.per_page) params.set("per_page", String(filters.per_page));
+  const qs = params.toString();
+  return qs ? `?${qs}` : "";
+}
+
+export function fetchAdminUsers(
+  filters: AdminUserFilters = {},
+): Promise<{ data: AdminUserListItem[]; meta?: PaginationMeta }> {
+  return apiPaged<AdminUserListItem>(`/admin/users${adminUsersQuery(filters)}`);
+}
+
+export function fetchAdminUser(id: number): Promise<AdminUserCard> {
+  return api<AdminUserCard>(`/admin/users/${id}`);
+}
+
+export function createAdminUser(body: {
+  first_name: string;
+  last_name: string;
+  email: string;
+  role: UserRole;
+}): Promise<AdminUserCard> {
+  return api<AdminUserCard>("/admin/users", { method: "POST", body });
+}
+
+export function updateAdminUser(
+  id: number,
+  body: Record<string, unknown>,
+): Promise<AdminUserCard> {
+  return api<AdminUserCard>(`/admin/users/${id}`, { method: "PATCH", body });
+}
+
+export function blockAdminUser(
+  id: number,
+  reason: string,
+): Promise<AdminUserCard> {
+  return api<AdminUserCard>(`/admin/users/${id}/block`, {
+    method: "POST",
+    body: { reason },
+  });
+}
+
+export function downloadAdminUsersCsv(
+  filters: AdminUserFilters = {},
+): Promise<void> {
+  const raw = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+  const url = `${raw.replace(/\/+$/, "")}/api/v1/admin/users/export.csv${adminUsersQuery(
+    { ...filters, page: undefined, per_page: undefined },
+  )}`;
+  return downloadFile(url, "osoby.csv");
 }

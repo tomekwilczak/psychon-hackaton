@@ -41,9 +41,9 @@ zmiany, nazwa poniżej to propozycja do zaakceptowania przy starcie pakietu.
 | `permission-matrix-testkit` | H02 | **merged** | `actingAsRole()`, matryca, nawigacja wg roli |
 | `participant-profile` | H01 | proponowana | dane profilu, PESEL/adres szyfrowane, zgody |
 | `gdpr-data-export` | H01 | proponowana | eksport RODO w tle, 5 zakresów danych |
-| `recruitment-applications` | H03 | proponowana | kolejka zgłoszeń, akceptacja/odrzucenie, import CSV |
-| `time-limited-access` | H04 | proponowana | wyjątki `access.active`, `extend-access`, audyt |
-| `course-catalog` | H05 | proponowana | lista etapów, `CourseAccess`, blokada z powodem |
+| `recruitment-applications` | H03 | **merged** (`2026-08-28-h03-recruitment-applications`) | kolejka zgłoszeń, akceptacja/odrzucenie, import CSV |
+| `time-limited-access` | H04 | **merged** (backfill, `h04-dostep-czasowy`) | wyjątki `access.active`, `extend-access`, audyt |
+| `course-catalog` | H05 | **merged** (backfill, `h05-katalog-kursow`) | lista etapów, `CourseAccess`, blokada z powodem — 4 odstępstwa oczekują na zatwierdzenie strażnika |
 | `reliability-monitoring` | H07 | proponowana | rzetelność z `ProgressAggregator`, próg, izolacja grup |
 | `course-content-management` | H08a | proponowana | CRUD kursów/lekcji, kolejność, soft delete |
 | `lesson-materials` | H08b | proponowana | upload, walidacja typu/rozmiaru, podpisane linki |
