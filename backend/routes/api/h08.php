@@ -17,6 +17,7 @@
 use App\Http\Controllers\Api\V1\Admin\CourseCatalogAdminController;
 use App\Http\Controllers\Api\V1\Admin\CourseSequenceController;
 use App\Http\Controllers\Api\V1\Admin\LessonAdminController;
+use App\Http\Controllers\Api\V1\Admin\MaterialAdminController;
 use Illuminate\Support\Facades\Route;
 
 if (! config('features.h08')) {
@@ -44,4 +45,10 @@ Route::middleware(['auth:sanctum', 'role:project_manager,super_admin'])->group(f
     Route::patch('/admin/courses/reorder', [CourseSequenceController::class, 'reorderCourses']);
     Route::post('/admin/courses/reorder/preview', [CourseSequenceController::class, 'preview']);
     Route::patch('/admin/courses/{course}/lessons/reorder', [CourseSequenceController::class, 'reorderLessons'])->whereNumber('course');
+
+    // H08b · materiały. Pobranie NIE jest tutaj: `GET /materials/{material}/download`
+    // dowiózł H05 (podpisany link, re-sprawdzanie dostępu w chwili pobrania).
+    Route::post('/admin/lessons/{lesson}/materials', [MaterialAdminController::class, 'storeForLesson'])->whereNumber('lesson');
+    Route::post('/admin/courses/{course}/materials', [MaterialAdminController::class, 'storeForCourse'])->whereNumber('course');
+    Route::delete('/admin/materials/{material}', [MaterialAdminController::class, 'destroy'])->whereNumber('material');
 });

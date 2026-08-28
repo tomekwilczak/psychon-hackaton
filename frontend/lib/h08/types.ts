@@ -43,6 +43,21 @@ export interface AdminLesson {
   updated_at: string | null;
 }
 
+/**
+ * Materiał w panelu (zasób administracyjny H08b). Bez `download_url` —
+ * podpisany link jest wystawiany wyłącznie uczestnikowi (H05).
+ */
+export interface AdminMaterial {
+  id: number;
+  name: string;
+  mime: string | null;
+  size: number | null;
+  /** Materiał wisi przy lekcji ALBO przy kursie — drugie pole jest wtedy `null`. */
+  lesson_id: number | null;
+  course_id: number | null;
+  created_at: string | null;
+}
+
 /** Jeden wiersz podglądu wpływu zmiany kolejności ścieżki na statusy osób. */
 export interface ReorderImpactRow {
   user_id: number;
