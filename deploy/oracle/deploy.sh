@@ -28,7 +28,11 @@ echo "Buduję frontend..."
 
 echo "Uruchamiam usługi Psychon..."
 "${compose[@]}" up -d pgsql redis mailpit
-"${compose[@]}" up -d app queue scheduler frontend
+# Kod backendu oraz build `.next` są współdzielone z długowiecznymi kontenerami.
+# Samo `up -d` nie restartuje procesu przy niezmienionej konfiguracji, przez co
+# Next.js może nadal wskazywać chunki usunięte podczas nowego buildu, a workery
+# Laravel mogą wykonywać stary kod. Odtworzenie procesów synchronizuje je z dyskiem.
+"${compose[@]}" up -d --force-recreate app queue scheduler frontend
 
 echo "Uruchamiam migracje i cache konfiguracji..."
 "${compose[@]}" exec -T app php artisan migrate --force
