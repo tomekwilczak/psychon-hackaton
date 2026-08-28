@@ -51,6 +51,11 @@ class Edition extends Model
         return $this->hasMany(Application::class);
     }
 
+    public function acceptedApplications(): HasMany
+    {
+        return $this->applications()->where('status', 'accepted');
+    }
+
     public function certificates(): HasMany
     {
         return $this->hasMany(Certificate::class);
