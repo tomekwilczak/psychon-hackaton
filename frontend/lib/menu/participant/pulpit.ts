@@ -9,6 +9,7 @@ const entry: MenuEntry = {
   label: "Pulpit",
   href: "/panel/pulpit",
   order: 15,
+  icon: "dashboard",
 };
 
 export default entry;

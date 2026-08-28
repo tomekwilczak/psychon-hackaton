@@ -5,6 +5,7 @@ const entry: MenuEntry = {
   label: "Start",
   href: "/panel/start",
   order: 10,
+  icon: "rocket",
 };
 
 export default entry;

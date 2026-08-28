@@ -5,6 +5,7 @@ const entry: MenuEntry = {
   label: "Certyfikat",
   href: "/panel/certyfikat",
   order: 80,
+  icon: "award",
 };
 
 export default entry;
