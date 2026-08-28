@@ -6,11 +6,13 @@
  * 2. Dodaj swój wpis jedną linią do importów i jedną do listy poniżej.
  */
 import h19Pulpit from "./h19-pulpit";
+import h19Ustawienia from "./h19-ustawienia";
 // import hXXNazwa from "./hXX-nazwa"; // ← dodaj swój wpis jedną linią
 
 import { sortMenu, type MenuEntry } from "../types";
 
 export const adminMenu: MenuEntry[] = sortMenu([
   h19Pulpit,
+  h19Ustawienia,
   // hXXNazwa, // ← i drugą tutaj
 ]);
