@@ -43,7 +43,7 @@ services:
       PHP_OPCACHE_ENABLE: "1"
     ports: !override []
     volumes:
-      - ./backend:/var/www/html
+      - ./backend:/var/www/html:z
       - backend_vendor:/var/www/html/vendor
       - backend_storage:/var/www/html/storage
       - backend_cache:/var/www/html/bootstrap/cache
@@ -66,7 +66,7 @@ services:
     environment:
       <<: *laravel-env
     volumes:
-      - ./backend:/var/www/html
+      - ./backend:/var/www/html:z
       - backend_vendor:/var/www/html/vendor
       - backend_storage:/var/www/html/storage
       - backend_cache:/var/www/html/bootstrap/cache
@@ -80,7 +80,7 @@ services:
     healthcheck:
       disable: true
     volumes:
-      - ./backend:/var/www/html
+      - ./backend:/var/www/html:z
       - backend_vendor:/var/www/html/vendor
       - backend_storage:/var/www/html/storage
       - backend_cache:/var/www/html/bootstrap/cache
@@ -114,7 +114,7 @@ services:
       NEXT_PUBLIC_API_URL: https://${STAGING_DOMAIN}
       NODE_ENV: production
     volumes:
-      - ./frontend:/app
+      - ./frontend:/app:z
       - frontend_node_modules:/app/node_modules
       - frontend_build:/app/.next
     restart: unless-stopped
