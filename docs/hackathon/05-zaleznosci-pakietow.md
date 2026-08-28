@@ -242,7 +242,7 @@ flowchart LR
   end
   subgraph TB["Tor B · administracja"]
     direction LR
-    B0["H19"]:::done --> B1["H18"]:::done --> B2["H03"]:::wip --> B3["H20"]:::todo
+    B0["H19"]:::done --> B1["H18"]:::done --> B2["H03"]:::done --> B3["H20"]:::todo
   end
   subgraph TC["Tor C · szyna i uprawnienia"]
     direction LR
