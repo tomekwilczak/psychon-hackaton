@@ -31,14 +31,14 @@ zmiany, nazwa poniżej to propozycja do zaakceptowania przy starcie pakietu.
 |---|---|---|---|
 | `lesson-playback-progress` | H06 | **merged** | odtwarzacz, trwały postęp, próg ukończenia |
 | `internship-journal-approvals` | H11 | **merged** | dziennik stażu + akceptacje opiekuna |
-| `edition-settings` | H19 | w toku (`h19-pulpit-i-ustawienia`) | klucze edycji, walidacja zakresów, audyt |
-| `admin-dashboard` | H19 | w toku (`h19-pulpit-i-ustawienia`) | liczniki + kolejki spraw z linkami |
-| `documents` | H14 | w toku (`h14-dokumenty-z-profilu`) | porozumienie/zaświadczenie ze snapshotem profilu |
-| `knowledge-tests` | H10 | w toku (`h10-testy-i-warsztat`) | test 10 pytań, limit podejść, snapshot |
-| `workshop-completion` | H10 | w toku (`h10-testy-i-warsztat`) | odznaczenie warsztatu stacjonarnego |
-| `certificate-issuance-verification` | H13 | w toku (`h13-certyfikaty-weryfikacja`) | warunki, wydanie, weryfikacja publiczna |
-| `onboarding` | H21 | w toku (`h21-onboarding-zacznij-tutaj`) | `#/panel/start`, treść edytowalna |
-| `permission-matrix-testkit` | H02 | w toku (`h02-uprawnienia-test-kit-matrycy`) | `actingAsRole()`, matryca, nawigacja wg roli |
+| `edition-settings` | H19 | **merged** | klucze edycji, walidacja zakresów, audyt |
+| `admin-dashboard` | H19 | **merged** | liczniki + kolejki spraw z linkami |
+| `documents` | H14 | **merged** | porozumienie/zaświadczenie ze snapshotem profilu |
+| `knowledge-tests` | H10 | **merged** | test 10 pytań, limit podejść, snapshot |
+| `workshop-completion` | H10 | **merged** | odznaczenie warsztatu stacjonarnego |
+| `certificate-issuance-verification` | H13 | **merged** | warunki, wydanie, weryfikacja publiczna |
+| `onboarding` | H21 | **merged** | `#/panel/start`, treść edytowalna |
+| `permission-matrix-testkit` | H02 | **merged** | `actingAsRole()`, matryca, nawigacja wg roli |
 | `participant-profile` | H01 | proponowana | dane profilu, PESEL/adres szyfrowane, zgody |
 | `gdpr-data-export` | H01 | proponowana | eksport RODO w tle, 5 zakresów danych |
 | `recruitment-applications` | H03 | proponowana | kolejka zgłoszeń, akceptacja/odrzucenie, import CSV |
