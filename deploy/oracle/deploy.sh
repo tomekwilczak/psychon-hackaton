@@ -24,7 +24,7 @@ echo "Instaluję zależności backendu..."
 
 echo "Buduję frontend..."
 "${compose[@]}" run --rm --no-deps --label traefik.enable=false frontend \
-  sh -c "npm ci --include=dev && NODE_ENV=production npm run build"
+  sh -c "npm ci --include=dev && rm -rf .next/* && NODE_ENV=production npm run build"
 
 echo "Uruchamiam usługi Psychon..."
 "${compose[@]}" up -d pgsql redis mailpit
