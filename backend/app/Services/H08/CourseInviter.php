@@ -26,7 +26,7 @@ final class CourseInviter
 {
     /**
      * @param  list<int>  $userIds
-     * @return int  liczba zaproszonych osób
+     * @return int liczba zaproszonych osób
      */
     public static function invite(Course $course, array $userIds, User $actor): int
     {
