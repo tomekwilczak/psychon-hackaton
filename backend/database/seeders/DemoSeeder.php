@@ -26,6 +26,7 @@ use App\Models\Test;
 use App\Models\TestAttempt;
 use App\Models\User;
 use App\Models\WorkshopCompletion;
+use App\Support\OnboardingContent;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -778,5 +779,14 @@ class DemoSeeder extends Seeder
     {
         Setting::create(['key' => 'sales_module_enabled', 'value' => 'false']);
         Setting::create(['key' => 'foundation_site_url', 'value' => 'https://niepodzielni.example']);
+
+        // H21 · treść ekranu onboardingu „Zacznij tutaj" (edytowalna przez administrację).
+        Setting::create([
+            'key' => OnboardingContent::KEY,
+            'value' => json_encode(
+                OnboardingContent::DEFAULTS,
+                JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+            ),
+        ]);
     }
 }

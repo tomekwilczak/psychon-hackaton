@@ -136,3 +136,84 @@ export async function apiPaged<T>(
 ): Promise<{ data: T[]; meta?: PaginationMeta }> {
   return (await request(path, options)) as { data: T[]; meta?: PaginationMeta };
 }
+
+/**
+ * Pobiera plik przez `fetch` z nagłówkiem Bearer i zapisuje go jako blob —
+ * zwykły `<a href>` nie przeniósłby tokenu do trasy chronionej autoryzacją
+ * (kontrakt §2, H14 „Pobranie podpisanym wygasającym linkiem").
+ */
+export async function downloadFile(url: string, filename: string): Promise<void> {
+  const headers = new Headers();
+  const token = getToken();
+  if (token) headers.set("Authorization", `Bearer ${token}`);
+
+  const res = await fetch(url, { headers });
+
+  if (!res.ok) {
+    let body: { error?: Partial<ApiErrorBody> } | null = null;
+    try {
+      body = await res.json();
+    } catch {
+      // brak JSON-a w odpowiedzi błędu
+    }
+    throw new ApiError({
+      status: body?.error?.status ?? res.status,
+      code: body?.error?.code ?? "unknown_error",
+      message: body?.error?.message ?? "Nie udało się pobrać pliku.",
+    });
+  }
+
+  const blob = await res.blob();
+  const objectUrl = window.URL.createObjectURL(blob);
+  const link = window.document.createElement("a");
+  link.href = objectUrl;
+  link.download = filename;
+  window.document.body.appendChild(link);
+  link.click();
+  link.remove();
+  window.URL.revokeObjectURL(objectUrl);
+}
+
+/* -------------------------------------------------------------------- */
+/* H14 — dokumenty generowane z profilu                                  */
+/* -------------------------------------------------------------------- */
+
+export type DocumentType = "volunteer_agreement" | "internship_certificate";
+
+export interface DocumentDto {
+  id: number;
+  type: DocumentType;
+  number: string;
+  generated_at: string;
+  signature_status: "none" | "signed_offline" | "e_signed";
+  download_url: string;
+}
+
+export interface DocumentTypeAvailability {
+  available: boolean;
+  reason?: "profile_incomplete" | "conditions_not_met" | "already_generated" | null;
+  missing_fields?: string[];
+  hours_accepted?: string;
+  hours_required?: string;
+  document_id?: number;
+}
+
+export type DocumentAvailableTypes = Record<DocumentType, DocumentTypeAvailability>;
+
+export async function fetchDocuments(): Promise<{
+  documents: DocumentDto[];
+  availableTypes: DocumentAvailableTypes | null;
+}> {
+  const { data, meta } = await apiPaged<DocumentDto>("/documents");
+  const availableTypes =
+    (meta?.extra?.available_types as DocumentAvailableTypes | undefined) ?? null;
+
+  return { documents: data, availableTypes };
+}
+
+export function generateDocument(type: DocumentType): Promise<DocumentDto> {
+  return api<DocumentDto>("/documents/generate", {
+    method: "POST",
+    body: { type },
+  });
+}
