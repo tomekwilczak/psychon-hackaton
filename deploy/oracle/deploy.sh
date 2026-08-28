@@ -23,15 +23,13 @@ echo "Instaluję zależności backendu..."
   composer install --no-interaction --no-dev --prefer-dist --no-progress --optimize-autoloader
 
 echo "Buduję frontend..."
-"${compose[@]}" run --rm --no-deps --label traefik.enable=false frontend \
-  sh -c "npm ci --include=dev && rm -rf .next/* && NODE_ENV=production npm run build"
+"${compose[@]}" build frontend
 
 echo "Uruchamiam usługi Psychon..."
 "${compose[@]}" up -d pgsql redis mailpit
-# Kod backendu oraz build `.next` są współdzielone z długowiecznymi kontenerami.
-# Samo `up -d` nie restartuje procesu przy niezmienionej konfiguracji, przez co
-# Next.js może nadal wskazywać chunki usunięte podczas nowego buildu, a workery
-# Laravel mogą wykonywać stary kod. Odtworzenie procesów synchronizuje je z dyskiem.
+# Frontend powstaje jako niezmienny obraz, więc działający kontener zachowuje
+# kompletny poprzedni build aż do chwili pomyślnego utworzenia nowego obrazu.
+# Procesy Laravel są odtwarzane, aby workery i OPcache nie trzymały starego kodu.
 "${compose[@]}" up -d --force-recreate app queue scheduler frontend
 
 echo "Uruchamiam migracje i cache konfiguracji..."
