@@ -67,6 +67,20 @@ jobs:
                 exec -T app php artisan migrate:fresh --seed --force
             fi
 
-            curl --fail --silent --show-error \
-              --retry 10 --retry-delay 3 --retry-connrefused \
-              https://psychon.mgmurski.pl/logowanie >/dev/null
+            ready=false
+            attempt=1
+            while [ "$attempt" -le 20 ]; do
+              if curl --fail --silent --show-error \
+                https://psychon.mgmurski.pl/logowanie >/dev/null; then
+                ready=true
+                break
+              fi
+              echo "Frontend jeszcze niegotowy (próba $attempt/20)."
+              attempt=$((attempt + 1))
+              sleep 3
+            done
+
+            if [ "$ready" != "true" ]; then
+              echo "Frontend nie osiągnął gotowości HTTP."
+              exit 1
+            fi
