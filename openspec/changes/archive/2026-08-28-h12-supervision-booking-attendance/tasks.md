@@ -57,7 +57,7 @@
 ## 9. Demo, testy jakości i kontrola zakresu
 
 - [x] 9.1 Utworzyć `DEMO/H12.md` z kanonicznymi fikcyjnymi kontami Marty i Joanny oraz krokami zapisu, `slot_full`, izolacji grup, obecności, zmiany superwizora i slotu H07; weryfikacja: scenariusz nie zawiera prawdziwych danych i odtwarza wszystkie kryteria H12 przez bezpośrednie adresy ekranów.
-- [ ] 9.2 Uruchomić celowane testy H12, test współbieżności PostgreSQL, `SeedIntegrityTest`, pełne `php artisan test` i Pint; weryfikacja: wszystkie komendy są zielone, a wyniki i wcześniejsze problemy spoza H12 są zapisane w `DEMO/H12.md` bez modyfikowania obcych pakietów.
+- [x] 9.2 Uruchomić celowane testy H12, test współbieżności PostgreSQL, `SeedIntegrityTest`, pełne `php artisan test` i Pint; weryfikacja: wszystkie komendy są zielone, a wyniki i wcześniejsze problemy spoza H12 są zapisane w `DEMO/H12.md` bez modyfikowania obcych pakietów.
 - [x] 9.3 Uruchomić `npm run lint` i `npm run build` oraz manualny przegląd obu ekranów klawiaturą i mobile; weryfikacja: komendy i przegląd są zielone, a stany ładowania, pusty, błędu, sukcesu i trwających akcji są udokumentowane.
 - [x] 9.4 Przejrzeć końcowy diff pod kątem własności i ograniczeń; weryfikacja: brak migracji, zależności, zmian fasad, `ProgressAggregator`, layoutów, `UserResource`, menu, H06/H11/koordynacji, H07/H18 oraz tras innych niż `backend/routes/api/h12.php`, a `git diff --check` przechodzi.
 - [x] 9.5 Potwierdzić brak nowych typów powiadomień i slugów audytu; weryfikacja: H12 nie wywołuje `Notify::send`, nie używa `supervision.reminder`, a jedynym audytem jest `supervisor.assigned` przez `AuditLog::record`.
