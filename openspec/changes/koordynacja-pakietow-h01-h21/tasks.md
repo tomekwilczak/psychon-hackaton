@@ -35,7 +35,7 @@
 - [ ] 4.4 H08 — CMS treści · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: uzgodniona część H08a/H08b oraz jej testy przechodzą, istnieje `DEMO/H08.md` z jawnym zakresem.
 - [ ] 4.5 H09 — Wizytówki i przypisania prowadzących · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: kryteria akceptacji i testy H09 przechodzą, istnieje `DEMO/H09.md`.
 - [x] 4.6 H11 — Dziennik stażu i akceptacje · Właściciel: `Mikołaj` · Status: `DONE`; weryfikacja: kryteria akceptacji i testy H11 przechodzą, istnieje `DEMO/H11.md`.
-- [ ] 4.7 H12 — Superwizje, zapisy i obecności · Właściciel: `Mikołaj` · Status: `BLOCKED` — kontrakt API nie definiuje pełnych DTO i walidacji H12, cyklu życia zapisu/wypisu ani właściciela wspólnego z H18 endpointu przypisania superwizora; weryfikacja: kryteria akceptacji i testy H12 przechodzą, istnieje `DEMO/H12.md`.
+- [x] 4.7 H12 — Superwizje, zapisy i obecności · Właściciel: `Mikołaj` · Status: `DONE`; weryfikacja: kryteria akceptacji i testy H12 przechodzą, istnieje `DEMO/H12.md`.
 - [x] 4.8 H13 — Pełny zakres certyfikatów i publicznej weryfikacji · Właściciel: `Tomek` · Status: `DONE` (PR #10 — wraz z minimum ★ z 3.6); weryfikacja: wszystkie kryteria H13 przechodzą, `DEMO/H13.md` opisuje pełny scenariusz.
 - [ ] 4.9 Przeprowadzić ścieżkę P1 na danych demo; weryfikacja: rekrutacja, dostęp, nauka, staż, superwizje i certyfikat współpracują bez zmiany kontraktu API.
 
