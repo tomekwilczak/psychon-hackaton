@@ -52,11 +52,23 @@ Następnie panel jest dostępny lokalnie pod `http://127.0.0.1:8025`.
 
 ## Aktualizacja
 
+Po połączeniu zmian do `main` aktualizację wykonuje automatycznie GitHub Actions z pliku
+`.github/workflows/deploy-staging.yml`. Repozytorium musi mieć ustawione sekrety Actions:
+
+- `STAGING_HOST` — adres VPS-a;
+- `STAGING_USER` — użytkownik SSH;
+- `STAGING_SSH_KEY` — prywatny, dedykowany klucz wdrożeniowy.
+
+Workflow można też uruchomić ręcznie w zakładce Actions. Opcja `reset_seeds` usuwa dane
+Psychon i odtwarza bazę z seedów demo, dlatego przy zwykłym wdrożeniu pozostaje wyłączona.
+
+Ręczna aktualizacja awaryjna:
+
 ```bash
 cd ~/psychon
-git fetch origin main
-git switch main
-git pull --ff-only origin main
+git fetch origin main:refs/remotes/origin/main
+git switch main || git switch --create main --track origin/main
+git reset --hard origin/main
 bash deploy/oracle/deploy.sh
 ```
 
