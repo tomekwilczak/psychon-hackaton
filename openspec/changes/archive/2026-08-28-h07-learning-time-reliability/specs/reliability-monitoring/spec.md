@@ -6,12 +6,12 @@ Zdolność pozwala administracji i prowadzącym wykrywać nierzetelne ukończeni
 
 ### Requirement: H07 nie rozszerza publicznego kontraktu
 
-System SHALL udostępniać wyłącznie `GET /admin/reliability`, `GET /admin/reliability/{userId}` i `GET /instructor/reliability`. Do czasu formalnej synchronizacji pełnego DTO przez strażnika H07 MUST pozostać przy minimalnym kształcie dopuszczonym przez koordynatora: standardowe koperty, `page`/`per_page` listy administracyjnej, brak dodatkowych filtrów, `reliability_percent` jako `string|null`, `below_threshold` jako `boolean`, zatwierdzone istniejące pola szczegółów oraz standardowe kody `401`, `403`, `404 not_found` i `422`. H07 MUST NOT publikować dodatkowego DTO, filtra, kodu błędu ani trasy.
+System SHALL udostępniać wyłącznie `GET /admin/reliability`, `GET /admin/reliability/{userId}` i `GET /instructor/reliability`. Oficjalny kontrakt SHALL definiować wdrożony minimalny kształt: standardowe koperty, `page`/`per_page` listy administracyjnej, brak dodatkowych filtrów, `reliability_percent` jako `string|null`, `below_threshold` jako `boolean`, zatwierdzone istniejące pola szczegółów oraz standardowe kody `401`, `403`, `404 not_found` i `422`. H07 MUST NOT publikować dodatkowego DTO, filtra, kodu błędu ani trasy.
 
-#### Scenario: Formalny kontrakt nie jest jeszcze zsynchronizowany
+#### Scenario: Formalny kontrakt odpowiada wdrożonemu API
 
-- **WHEN** dokument kontraktu zawiera nazwy operacji, lecz niepełne DTO, a koordynator dopuścił minimalną implementację
-- **THEN** system publikuje wyłącznie uzgodniony minimalny kształt, a formalna synchronizacja dokumentu pozostaje jawnym zadaniem strażnika
+- **WHEN** klient korzysta z jednej z trzech operacji H07
+- **THEN** odpowiedź, parametry i błędy odpowiadają pełnemu kształtowi opisanemu w oficjalnym kontrakcie
 
 #### Scenario: Potrzeba szczegółów prowadzącego
 

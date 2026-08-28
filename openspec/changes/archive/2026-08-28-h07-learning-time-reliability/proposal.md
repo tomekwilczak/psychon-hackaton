@@ -10,7 +10,7 @@ Administracja i prowadzący potrzebują jednego, porównywalnego sygnału wskazu
 - Wartość zbiorczą pobieramy wyłącznie z zamrożonego `ProgressAggregator`; zapytania szczegółowe mogą czytać `lesson_progress` i `lessons` tylko do zatwierdzonych pól diagnostycznych.
 - Flaga progu korzysta przy każdym odczycie z `Settings::edition('reliability_threshold')`, dzięki czemu zmiana H19 działa bez wdrożenia.
 - Nie dodajemy migracji, zależności, zdarzeń audytowych, powiadomień ani tras poza trzema operacjami H07.
-- Zachowujemy formalne zgłoszenie do strażnika kontraktu dla brakujących DTO i semantyki HTTP H07. Koordynator Błażej dopuścił implementację minimalnego kształtu odpowiedzi bez rozszerzania oficjalnych tras, filtrów i kodów błędów; późniejsza synchronizacja dokumentu kontraktu pozostaje zadaniem organizacyjnym.
+- Synchronizujemy oficjalny kontrakt HTTP z minimalnym kształtem odpowiedzi H07 wdrożonym po decyzji koordynatora, bez rozszerzania tras, filtrów i kodów błędów.
 - Korzystamy z poprawionego na `origin/main` publicznego API `ProgressAggregator`, bez zmiany fasady i bez lokalnego algorytmu zastępczego.
 
 ## Capabilities
@@ -29,4 +29,4 @@ Administracja i prowadzący potrzebują jednego, porównywalnego sygnału wskazu
 - Frontend H07: nowy ekran `/admin/czas-nauki`, kod domenowy H07, per-pakietowy wpis menu oraz wnętrze publicznego slotu `frontend/components/h12/H07ReliabilitySlot.tsx`; bez zmian w stronie, tabeli, typach i logice H12.
 - Integracje: odczyt `ProgressAggregator`, `Settings::edition('reliability_threshold')`, `lesson_progress`, `lessons` i aktualnych `supervisor_assignments`.
 - Testy: seedy Filipa (około 15%, pierwszy, poniżej progu) i Marty (około 85%, bez flagi), zgodność wszystkich prezentacji z agregatorem, role, 401/403/404, izolacja grup, zmiana progu, stany puste i błędy.
-- Zależności organizacyjne: formalna synchronizacja pełnego kontraktu HTTP H07 przez strażnika kontraktu oraz rejestracja wpisu menu przez właściciela wspólnego rejestru; żadna z nich nie uzasadnia lokalnego rozszerzania API ani edycji plików staff-owned.
+- Zależności organizacyjne: bramki kontraktu i rejestracji wpisu menu są domknięte w zmianie integracyjnej po wdrożeniu H07; nie rozszerza to API ani własności pozostałych plików staff-owned.

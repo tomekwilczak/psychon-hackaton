@@ -6,6 +6,7 @@
  * 2. Dodaj swój wpis jedną linią do importów i jedną do listy poniżej.
  */
 import h08Kursy from "./h08-kursy";
+import h07CzasNauki from "./h07-czas-nauki";
 import h11Staz from "./h11-staz";
 import h16Emails from "./h16-emails";
 import h18Uczestniczki from "./h18-uczestniczki";
@@ -20,6 +21,7 @@ import { sortMenu, type MenuEntry } from "../types";
 
 export const adminMenu: MenuEntry[] = sortMenu([
   h19Pulpit,
+  h07CzasNauki,
   h08Kursy,
   h19Ustawienia,
   h18Uczestniczki,
