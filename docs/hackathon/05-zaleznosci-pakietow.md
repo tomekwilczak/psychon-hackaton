@@ -254,7 +254,7 @@ flowchart LR
   end
   subgraph TE["Tor E · treści i ludzie"]
     direction LR
-    E0["H08a"]:::todo --> E1["H08b"]:::todo --> E2["H09"]:::wip --> E3["H17"]:::done
+    E0["H08a"]:::todo --> E1["H08b"]:::todo --> E2["H09"]:::done --> E3["H17"]:::done
   end
   subgraph TF["Tor F · dokumenty"]
     direction LR
@@ -262,9 +262,10 @@ flowchart LR
   end
 ```
 
-Stan wg `openspec/changes/koordynacja-pakietow-h01-h21/tasks.md` (2026-08-28, po scaleniu H20
-i H17 oraz podjęciu H09): `DONE`/`REVIEW` → zielony, `W TOKU` → żółty, `GOTOWE` (nieodebrany)
-i `BLOCKED` → czerwony. Jedyny czerwony ciąg to H08a/H08b — pakiet H08 nie ma właściciela.
+Stan wg `openspec/changes/koordynacja-pakietow-h01-h21/tasks.md` (2026-08-28, po scaleniu H20,
+H17 i H09): `DONE`/`REVIEW` → zielony, `W TOKU` → żółty, `GOTOWE` (nieodebrany) i `BLOCKED` →
+czerwony. Został jeden pakiet żółty (H07) i jeden czerwony ciąg — H08a/H08b, bo H08 wciąż
+nie ma właściciela.
 
 Uwaga do torów A i E: strzałka `H21 → H01 → H05` nie jest blokadą techniczną, tylko
 **kolejnością zwrotu z inwestycji** — H21 i H19 to pakiety S, dowożone w kilka godzin,
