@@ -5,6 +5,11 @@ Mikołaja. Nie wystawia nowych portów publicznych i nie uruchamia drugiego reve
 Frontend i API dołączają do istniejącej sieci `n8n_traefik`, a HTTPS obsługuje istniejący
 Traefik z resolverem `leresolver`.
 
+Basic Auth chroni interfejs WWW. API nie może używać tej samej warstwy, ponieważ aplikacja
+uwierzytelnia żądania nagłówkiem `Authorization: Bearer`. Endpointy danych są chronione
+po stronie Laravel Sanctum zgodnie z kontraktem API; na stagingu znajdują się wyłącznie
+dane demo.
+
 ## Założenia
 
 - domena: `psychon.mgmurski.pl`;
