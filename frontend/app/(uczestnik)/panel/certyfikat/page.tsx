@@ -120,7 +120,7 @@ export default function CertificatePage() {
   }
 
   return (
-    <div className="flex max-w-2xl flex-col gap-6">
+    <div className="flex flex-col gap-6">
       <h1 className="text-h2 font-black text-ink">Certyfikat ukończenia programu</h1>
 
       <Card title="Warunki ukończenia">
