@@ -30,7 +30,7 @@
 ## 4. Fala P0.5 i P1
 
 - [x] 4.1 H03 — Rekrutacja i kolejka zgłoszeń · Właściciel: `Mikołaj` · Status: `DONE` (PR #33 scalony); weryfikacja: kryteria akceptacji i testy H03 przechodzą, istnieje `DEMO/H03.md`.
-- [ ] 4.2 H04 — Dostęp czasowy · Właściciel: `Irek` · Status: `REVIEW`; weryfikacja: kryteria akceptacji i testy H04 przechodzą, istnieje `DEMO/H04.md`.
+- [x] 4.2 H04 — Dostęp czasowy · Właściciel: `Irek` · Status: `DONE` (PR #20 scalony); weryfikacja: kryteria akceptacji i testy H04 przechodzą, istnieje `DEMO/H04.md`.
 - [ ] 4.3 H07 — Pomiar czasu nauki i rzetelność · Właściciel: `Mikołaj` · Status: `W TOKU`; weryfikacja: kryteria akceptacji i testy H07 przechodzą, istnieje `DEMO/H07.md`.
 - [ ] 4.4 H08 — CMS treści · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: uzgodniona część H08a/H08b oraz jej testy przechodzą, istnieje `DEMO/H08.md` z jawnym zakresem.
 - [ ] 4.5 H09 — Wizytówki i przypisania prowadzących · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: kryteria akceptacji i testy H09 przechodzą, istnieje `DEMO/H09.md`.
@@ -44,7 +44,7 @@
 - [x] 5.1 H14 — Dokumenty generowane z profilu · Właściciel: `Błażej` · Status: `DONE`; weryfikacja: kryteria akceptacji i testy H14 przechodzą, istnieje `DEMO/H14.md`.
 - [ ] 5.2 H15 — Profil psychologa · Właściciel: `Błażej` · Status: `REVIEW` (PR #29); weryfikacja: kryteria akceptacji i testy H15 przechodzą, istnieje `DEMO/H15.md`.
 - [ ] 5.3 H17 — Pytania do prowadzącego · Właściciel: `Błażej` · Status: `W TOKU`; weryfikacja: kryteria akceptacji i testy H17 przechodzą, istnieje `DEMO/H17.md`.
-- [ ] 5.4 H20 — Raporty i dziennik działań · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: kryteria akceptacji i testy H20 przechodzą, istnieje `DEMO/H20.md`.
+- [ ] 5.4 H20 — Raporty i dziennik działań · Właściciel: `Irek` · Status: `REVIEW`; weryfikacja: kryteria akceptacji i testy H20 przechodzą, istnieje `DEMO/H20.md`.
 
 ## 6. Integracja i przekazanie
 
