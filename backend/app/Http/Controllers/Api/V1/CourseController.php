@@ -9,6 +9,7 @@ use App\Http\Resources\CourseDetailResource;
 use App\Http\Resources\CourseListResource;
 use App\Models\Course;
 use App\Queries\CourseCatalogQuery;
+use App\Services\CourseUnlockNotifier;
 use App\Support\CourseAccess;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -20,9 +21,11 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  */
 class CourseController extends Controller
 {
-    public function index(CourseIndexRequest $request): AnonymousResourceCollection
+    public function index(CourseIndexRequest $request, CourseUnlockNotifier $notifier): AnonymousResourceCollection
     {
-        $query = CourseCatalogQuery::visibleTo($request->user())->with(['lessons', 'test']);
+        $user = $request->user();
+
+        $query = CourseCatalogQuery::visibleTo($user)->with(['lessons', 'test']);
 
         if ($request->filled('product_group')) {
             $query->where('product_group', $request->string('product_group')->value());
@@ -32,6 +35,13 @@ class CourseController extends Controller
             ->orderByRaw('sequence_order asc nulls last')
             ->orderBy('title')
             ->get();
+
+        if (CourseCatalogQuery::isParticipant($user)) {
+            $notifier->announce($user, $courses->map(fn (Course $course): array => [
+                'course' => $course,
+                'state' => CourseAccess::state($user, $course),
+            ]));
+        }
 
         return CourseListResource::collection($courses);
     }
