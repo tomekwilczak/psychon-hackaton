@@ -14,6 +14,10 @@ fi
 
 "${compose[@]}" config --quiet
 
+echo "Przygotowuję prywatne wolumeny aplikacji..."
+"${compose[@]}" run --rm --no-deps --user 0:0 --entrypoint sh app -lc \
+  'mkdir -p vendor storage/framework/cache storage/framework/sessions storage/framework/views storage/logs bootstrap/cache && chown -R 33:33 vendor storage bootstrap/cache'
+
 echo "Instaluję zależności backendu..."
 "${compose[@]}" run --rm --no-deps app \
   composer install --no-interaction --no-dev --prefer-dist --no-progress --optimize-autoloader
@@ -24,7 +28,6 @@ echo "Uruchamiam usługi Psychon..."
 
 echo "Uruchamiam migracje i cache konfiguracji..."
 "${compose[@]}" exec -T app php artisan migrate --force
-"${compose[@]}" exec -T app php artisan storage:link --force
 "${compose[@]}" exec -T app php artisan optimize
 
 echo "Status usług:"

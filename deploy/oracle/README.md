@@ -12,6 +12,8 @@ Traefik z resolverem `leresolver`.
 - sieć Docker `n8n_traefik` już istnieje;
 - środowisko jest stagingiem z danymi testowymi, Basic Auth i `noindex`;
 - prawdziwe sekrety są tylko w `deploy/oracle/.env` na VPS-ie.
+- zależności, pliki runtime i build Next.js są w prywatnych wolumenach Dockera, a nie
+  w katalogu Git.
 
 ## Pierwsze uruchomienie
 
