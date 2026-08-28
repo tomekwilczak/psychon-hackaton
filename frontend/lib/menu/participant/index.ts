@@ -7,6 +7,7 @@
  */
 import h21Start from "./h21-start";
 import h01Profil from "./h01-profil";
+import h13Certyfikat from "./h13-certyfikat";
 // import hXXNazwa from "./hXX-nazwa"; // ← dodaj swój wpis jedną linią
 
 import { sortMenu, type MenuEntry } from "../types";
@@ -14,5 +15,6 @@ import { sortMenu, type MenuEntry } from "../types";
 export const participantMenu: MenuEntry[] = sortMenu([
   h21Start,
   h01Profil,
+  h13Certyfikat,
   // hXXNazwa, // ← i drugą tutaj
 ]);
