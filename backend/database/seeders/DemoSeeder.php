@@ -109,7 +109,7 @@ class DemoSeeder extends Seeder
             'email' => 'marta@demo.pl',
             'password' => $demoPassword,
             'phone' => '+48 600 100 200',
-            'pesel' => '90010112345', // fictional
+            'pesel' => '90010112301', // fictional, checksum-valid (b. 1990-01-01)
             'address_street' => 'ul. Przykładowa 1/2',
             'address_city' => 'Warszawa',
             'address_zip' => '00-001',
@@ -124,7 +124,7 @@ class DemoSeeder extends Seeder
             'email' => 'ola@demo.pl',
             'password' => $demoPassword,
             'phone' => '+48 600 100 300',
-            'pesel' => '85050554321', // fictional
+            'pesel' => '85050529842', // fictional, checksum-valid (b. 1985-05-05)
             'address_street' => 'ul. Wzorcowa 3',
             'address_city' => 'Kraków',
             'address_zip' => '30-001',
@@ -140,7 +140,7 @@ class DemoSeeder extends Seeder
             'email' => 'filip@demo.pl',
             'password' => $demoPassword,
             'phone' => '+48 600 100 400',
-            'pesel' => '99120887654', // fictional
+            'pesel' => '99120812376', // fictional, checksum-valid (b. 1999-12-08)
             'role' => 'student',
             'access_expires_at' => now()->addMonths(6),
         ]);
