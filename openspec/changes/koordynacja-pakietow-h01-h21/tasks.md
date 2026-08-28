@@ -16,12 +16,12 @@
 ## 3. Fala P0 i minimum demonstracyjne
 
 - [x] 3.1 H01 — Profil użytkownika i eksport RODO · Właściciel: `Tomek` · Status: `DONE`; weryfikacja: kryteria ★ i testy H01 przechodzą, istnieje `DEMO/H01.md`.
-- [ ] 3.2 H02 — Uprawnienia i test-kit matrycy · Właściciel: `Błażej` · Status: `W TOKU`; weryfikacja: kryteria ★ i testy H02 przechodzą, istnieje `DEMO/H02.md`.
+- [ ] 3.2 H02 — Uprawnienia i test-kit matrycy · Właściciel: `Irek` · Status: `W TOKU` (przejęte po `Błażej` — porzucone); weryfikacja: kryteria ★ i testy H02 przechodzą, istnieje `DEMO/H02.md`.
 - [ ] 3.3 H05 — Katalog kursów i sekwencyjne odblokowanie · Właściciel: `Mariusz` · Status: `W TOKU`; weryfikacja: kryteria ★ i testy H05 przechodzą, istnieje `DEMO/H05.md`.
 - [ ] 3.4 H06 — Lekcja, odtwarzacz i postęp · Właściciel: `Mikołaj` · Status: `BLOCKED` — brak wiążącego DTO lekcji/ukończenia i pola trwałej pozycji w schemacie; weryfikacja: kryteria ★ i testy H06 przechodzą, istnieje `DEMO/H06.md`.
 - [ ] 3.5 H10 — Testy wiedzy i warsztat · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: kryteria ★ i testy H10 przechodzą, istnieje `DEMO/H10.md`.
 - [ ] 3.6 H13★ — Minimum certyfikatu i warunków ukończenia · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: kryteria oznaczone ★ w H13 przechodzą, istnieje sekcja minimum w `DEMO/H13.md`.
-- [ ] 3.7 H16 — Powiadomienia, dzwonek i e-maile symulowane · Właściciel: `Irek` · Status: `W TOKU`; weryfikacja: kryteria ★ i testy H16 przechodzą, wiadomości trafiają wyłącznie do Mailpit, istnieje `DEMO/H16.md`.
+- [x] 3.7 H16 — Powiadomienia, dzwonek i e-maile symulowane · Właściciel: `Irek` · Status: `DONE`; weryfikacja: kryteria ★ i testy H16 przechodzą, wiadomości trafiają wyłącznie do Mailpit, istnieje `DEMO/H16.md`.
 - [ ] 3.8 H18 — Panel osób i karta osoby · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: kryteria ★ i testy H18 przechodzą, istnieje `DEMO/H18.md`.
 - [ ] 3.9 H19 — Pulpit administracyjny i ustawienia edycji · Właściciel: `Błażej` · Status: `W TOKU`; weryfikacja: kryteria ★ i testy H19 przechodzą, istnieje `DEMO/H19.md`.
 - [ ] 3.10 H21 — Onboarding „Zacznij tutaj” · Właściciel: `Tomek` · Status: `W TOKU`; weryfikacja: kryteria ★ i testy H21 przechodzą, istnieje `DEMO/H21.md`.
