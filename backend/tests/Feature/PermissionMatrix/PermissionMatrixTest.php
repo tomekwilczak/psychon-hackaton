@@ -228,6 +228,11 @@ class PermissionMatrixTest extends TestCase
     /**
      * §5(f) — nikt nie modyfikuje dziennika działań. Kontrakt: „Trasy
      * modyfikacji audytu nie istnieją (próba → 404)."
+     *
+     * Testujemy wyłącznie podścieżki z id (`/admin/audit/1`) — od H20
+     * `GET /admin/audit` (bez id) jest prawdziwą, zarejestrowaną trasą, więc
+     * `POST` pod ten sam adres trafia w 405 (zła metoda), nie 404 (brak
+     * trasy). To nie jest przypadek objęty tym kryterium.
      */
     #[Test]
     public function matrix_5f(): void
@@ -235,7 +240,7 @@ class PermissionMatrixTest extends TestCase
         $this->actingAsRole('super_admin');
 
         foreach ([
-            ['POST', '/api/v1/admin/audit'],
+            ['POST', '/api/v1/admin/audit/1'],
             ['PATCH', '/api/v1/admin/audit/1'],
             ['DELETE', '/api/v1/admin/audit/1'],
         ] as [$method, $uri]) {
