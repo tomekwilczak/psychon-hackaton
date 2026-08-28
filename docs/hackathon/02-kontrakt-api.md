@@ -169,6 +169,106 @@ Poniżej progu → 422 `not_enough_active_time`. Lekcja z `duration_seconds = 0`
 nie jest `completable`; próba ukończenia również zwraca 422
 `not_enough_active_time`.
 
+### Rzetelność nauki (H07)
+
+H07 udostępnia dokładnie trzy operacje. Wszystkie wymagają Bearer tokenu i przyjmują
+wyłącznie parametry opisane poniżej. Wynik rzetelności pochodzi z
+`ProgressAggregator`: jest zaokrąglonym do liczby całkowitej, ograniczonym do 100%
+ilorazem sumy `active_seconds` i sumy `duration_seconds` ukończonych lekcji z
+`duration_seconds > 0`. W API procent jest dziesiętnym stringiem albo `null`, gdy
+osoba nie ma mierzalnej ukończonej lekcji. `below_threshold` jest prawdziwe wyłącznie,
+gdy wynik istnieje i jest mniejszy od bieżącego
+`Settings::edition('reliability_threshold')`; wynik równy progowi nie jest poniżej
+progu.
+
+`GET /admin/reliability?page=1&per_page=50` → `200` — dostęp wyłącznie dla
+`project_manager` i `super_admin`. `page` jest dodatnią liczbą całkowitą, a
+`per_page` liczbą całkowitą od 1 do 100; wartości domyślne to odpowiednio 1 i 50.
+Inne parametry, w tym filtry i własne sortowanie, zwracają `422 validation_failed`.
+Lista obejmuje aktywnych użytkowników o roli `volunteer` lub `student` z aktywnej
+edycji. Serwer sortuje ją rosnąco po rzetelności, osoby z wynikiem `null` umieszcza
+na końcu, a remisy rozstrzyga rosnąco po nazwisku, imieniu i `id`. Sortowanie odbywa
+się przed paginacją.
+
+```json
+{
+  "data": [
+    {
+      "id": 17,
+      "first_name": "Filip",
+      "last_name": "Demo",
+      "email": "filip@demo.pl",
+      "reliability_percent": "15",
+      "below_threshold": true
+    }
+  ],
+  "meta": { "current_page": 1, "per_page": 50, "total": 1, "last_page": 1 }
+}
+```
+
+`GET /admin/reliability/{userId}` → `200` — te same role i pola osoby co na liście,
+rozszerzone o `lessons`. Szczegóły obejmują wyłącznie ukończone lekcje z dodatnim
+czasem trwania. `below_threshold` lekcji porównuje jej procent aktywnego czasu,
+ograniczony do 100%, z tym samym bieżącym progiem edycji. Wartość zbiorcza nadal
+pochodzi wyłącznie z `ProgressAggregator` i nie jest liczona z tablicy `lessons`.
+
+```json
+{
+  "data": {
+    "id": 17,
+    "first_name": "Filip",
+    "last_name": "Demo",
+    "email": "filip@demo.pl",
+    "reliability_percent": "15",
+    "below_threshold": true,
+    "lessons": [
+      {
+        "id": 21,
+        "title": "Wprowadzenie do wywiadu",
+        "active_seconds": 270,
+        "duration_seconds": 1800,
+        "open_count": 2,
+        "last_activity_at": "2026-10-03T12:30:00Z",
+        "below_threshold": true
+      }
+    ]
+  }
+}
+```
+
+`last_activity_at` może być `null`. Nieistniejący `userId` oraz użytkownik spoza
+aktywnej edycji, dozwolonych ról lub aktywnego statusu zwracają identyczne
+`404 not_found` z komunikatem „Nie znaleziono osoby.”. Operacja nie przyjmuje
+parametrów query. Trasa szczegółów prowadzącego nie istnieje.
+
+`GET /instructor/reliability` → `200` — dostęp wyłącznie dla roli `instructor`.
+Zakres jest wyznaczany wyłącznie z tokenu: odpowiedź obejmuje aktywnych wolontariuszy
+i studentów aktywnej edycji z `supervisor_assignments`, dla których
+`supervisor_id` odpowiada zalogowanemu prowadzącemu, a `unassigned_at` jest `null`.
+Operacja nie przyjmuje identyfikatora osoby, grupy, prowadzącego ani innych parametrów.
+Kolejność jest taka sama jak na liście administracyjnej. Odpowiedź nie zawiera e-maili
+ani szczegółów lekcji:
+
+```json
+{
+  "data": [
+    {
+      "id": 18,
+      "first_name": "Marta",
+      "last_name": "Demo",
+      "reliability_percent": "85",
+      "below_threshold": false
+    }
+  ],
+  "meta": { "current_page": 1, "per_page": 50, "total": 1, "last_page": 1 }
+}
+```
+
+Puste listy zwracają `data: []` z `total: 0`; brak wyniku osoby jest reprezentowany
+przez `reliability_percent: null` i `below_threshold: false`. Brak lub nieważny token
+daje `401 unauthenticated`, a każda rola niedopuszczona dla danej operacji —
+`403 forbidden`. Odczyty H07 nie emitują audytu ani powiadomień.
+
 ### Test (H10)
 
 `GET /courses/{slug}/test` → pytania bez flag poprawności:

@@ -1,13 +1,13 @@
 ## Context
 
-Zob. `proposal.md` — motywacja. H07 łączy Laravel API, dwa konteksty Next.js i trzy istniejące źródła zachowania: pomiar `active_seconds` z H06, publiczny punkt integracji H12 oraz ustawienie `reliability_threshold` z H19. Schemat i migracje są zamrożone, a H07 nie może zmieniać wspólnych fasad, implementacji H06/H12/H19, wspólnego rejestru menu ani tras innych pakietów.
+Zob. `proposal.md` — motywacja. H07 łączy Laravel API, dwa konteksty Next.js i trzy istniejące źródła zachowania: pomiar `active_seconds` z H06, publiczny punkt integracji H12 oraz ustawienie `reliability_threshold` z H19. Schemat i migracje są zamrożone, a H07 nie może zmieniać wspólnych fasad, implementacji H06/H12/H19 ani tras innych pakietów. Wspólny rejestr menu jest dotykany wyłącznie w zatwierdzonej zmianie integracyjnej, która rejestruje gotową definicję H07.
 
 Stan zastany ujawnił dwie rozbieżności wymagające koordynacji:
 
-- oficjalny kontrakt wymienia trzy trasy H07, lecz nie definiuje ich DTO ani pełnej semantyki HTTP;
+- oficjalny kontrakt początkowo wymieniał trzy trasy H07 bez DTO ani pełnej semantyki HTTP;
 - pierwotna wersja zamrożonego `ProgressAggregator` liczyła inaczej niż reguła H07. Właściciel fasady poprawił ją na `origin/main`, zachowując publiczny interfejs, a testy agregatora obejmują lekcje różnej długości, rekord nieukończony i brak danych.
 
-Formalne DTO nadal wymaga synchronizacji przez strażnika kontraktu. Koordynator Błażej dopuścił jednak implementację minimalnego, nieposzerzającego kontraktu kształtu H07: tylko trzy oficjalne operacje, standardowe koperty, `page`/`per_page` dla list administracyjnych, brak dodatkowych filtrów, procent jako `string|null`, flaga jako `boolean`, administracyjne szczegóły wyłącznie z zatwierdzonych istniejących pól oraz standardowe `401`, `403`, `404 not_found` i `422`. Zgłoszenie strażnika pozostaje otwarte, ale nie jest już blokadą kodu H07.
+Koordynator Błażej dopuścił implementację minimalnego, nieposzerzającego kontraktu kształtu H07: tylko trzy oficjalne operacje, standardowe koperty, `page`/`per_page` dla list administracyjnych, brak dodatkowych filtrów, procent jako `string|null`, flaga jako `boolean`, administracyjne szczegóły wyłącznie z zatwierdzonych istniejących pól oraz standardowe `401`, `403`, `404 not_found` i `422`. Domknięcie zmiany synchronizuje ten wdrożony kształt z oficjalnym dokumentem kontraktu.
 
 H12 dostarczył natomiast uzgodniony punkt integracji. Jest nim domyślnie eksportowany komponent `frontend/components/h12/H07ReliabilitySlot.tsx` o interfejsie `H07ReliabilitySlot(): JSX.Element`, bez propsów. `frontend/components/h12/InstructorGroup.tsx` renderuje go na końcu strony grupy. Ta zależność nie blokuje planu.
 
@@ -17,7 +17,7 @@ H12 dostarczył natomiast uzgodniony punkt integracji. Jest nim domyślnie ekspo
 
 - utrzymać jedną wartość zbiorczą pochodzącą wyłącznie z `ProgressAggregator`;
 - rozdzielić pobieranie populacji, autoryzację, serializację i prezentację, tak aby izolację prowadzącego dało się wykazać testami;
-- udokumentować rozstrzygnięte bramki i pozostające działania organizacyjne bez lokalnego rozszerzania kontraktu;
+- udokumentować i domknąć rozstrzygnięte bramki bez lokalnego rozszerzania kontraktu;
 - zachować niezależność sekcji H07 od stanu i pobierania danych H12;
 - zaplanować sprawdzalną zgodność API, obu ekranów, ustawienia progu i danych demo.
 
@@ -27,19 +27,19 @@ H12 dostarczył natomiast uzgodniony punkt integracji. Jest nim domyślnie ekspo
 - zmiana schematu, migracji, zapisu czasu H06 albo ustawień H19;
 - dodanie trasy szczegółów prowadzącego, lokalnego DTO, filtra, zdarzenia audytowego lub powiadomienia;
 - modyfikacja strony, tabeli członków, typów, pobierania lub układu H12;
-- rejestrowanie wpisu H07 bezpośrednio we wspólnym indeksie menu.
+- zmiana mechanizmu wspólnego menu poza jednorazową rejestracją gotowej definicji H07.
 
 ## Decisions
 
 ### 1. Bramki i decyzja koordynatora wyznaczają granice implementacji
 
-Plan stosuje trzy nazwane bramki. `GATE-H07-A1` jest zamknięta na `origin/main`. Dla `GATE-H07-C1` koordynator dopuścił minimalną implementację przed formalną synchronizacją dokumentu, dlatego otwarte zgłoszenie nie blokuje już wykonanych warstw H07. `GATE-H07-M1` dotyczy wyłącznie odkrywalności strony i pozostaje po stronie właściciela wspólnego rejestru.
+Plan stosuje trzy nazwane bramki. `GATE-H07-A1` został zamknięty przez właściciela fasady. Dla `GATE-H07-C1` koordynator dopuścił minimalną implementację przed formalną synchronizacją dokumentu, a domknięcie H07 synchronizuje kontrakt. `GATE-H07-M1` został zamknięty przez zatwierdzoną rejestrację gotowej definicji w istniejącym wspólnym rejestrze.
 
 | Bramka | Właściciel | Warunek zamknięcia | Blokowany zakres |
 | --- | --- | --- | --- |
-| `GATE-H07-C1` | strażnik kontraktu HTTP | formalna synchronizacja `docs/hackathon/02-kontrakt-api.md` z minimalnym kształtem zatwierdzonym przez koordynatora i wdrożonym przez H07 | brak blokady kodu; otwarte działanie organizacyjne, bez prawa do dodania trasy, filtra lub pola |
+| `GATE-H07-C1` | strażnik kontraktu HTTP | formalna synchronizacja `docs/hackathon/02-kontrakt-api.md` z minimalnym kształtem zatwierdzonym przez koordynatora i wdrożonym przez H07 | zamknięta w zmianie domykającej; bez dodatkowej trasy, filtra lub pola |
 | `GATE-H07-A1` | właściciel zamrożonej fasady startera | zachowanie `ProgressAggregator` odpowiada ilorazowi `sum(active_seconds) / sum(duration_seconds)` wyłącznie ukończonych mierzalnych lekcji, bez zmiany publicznej sygnatury; testy właściciela obejmują różne długości lekcji, postęp nieukończony i brak danych | zamknięta na `origin/main` |
-| `GATE-H07-M1` | właściciel wspólnego rejestru menu | właściciel rejestruje przygotowany per-pakietowy wpis H07 we wspólnym indeksie bez przekazywania własności pliku H07 | wyłącznie odkrywalność strony w menu; bezpośrednia trasa i reszta H07 nie są blokowane |
+| `GATE-H07-M1` | właściciel wspólnego rejestru menu | przygotowany per-pakietowy wpis H07 jest zarejestrowany we wspólnym indeksie bez zmiany mechanizmu menu | zamknięta w zmianie domykającej; `/admin/czas-nauki` jest dostępne z nawigacji |
 
 Alternatywą byłoby przyjęcie lokalnych kształtów odpowiedzi i lokalnego algorytmu. Odrzucamy ją, ponieważ złamałaby źródło prawdy kontraktu i wymóg zgodności z fasadą.
 
@@ -90,7 +90,7 @@ Slot jest samowystarczalnym klientem `GET /instructor/reliability`. Pokazuje wł
 
 Typy oraz funkcje klienta H07 zostaną umieszczone w domenie H07 i będą używać istniejącej infrastruktury `frontend/lib/api.ts`. Nie zmienią ogólnego klienta tylko po to, by obsłużyć lokalny przypadek. Dekodowanie błędów zachowa oficjalną kopertę i rozróżni co najmniej brak uwierzytelnienia, brak uprawnień, brak zasobu i błąd techniczny zgodnie z kontraktem.
 
-H07 przygotuje własny plik wpisu menu, zgodny z mechanizmem per-pakietowym. Nie zmieni layoutu ani wspólnego `frontend/lib/menu/admin/index.ts`; rejestracja w tym pliku jest `GATE-H07-M1` i należy do jego właściciela.
+H07 przygotowuje własny plik wpisu menu, zgodny z mechanizmem per-pakietowym. Nie zmienia layoutu ani mechanizmu rejestru. W zmianie domykającej właściciel integracji dodaje wyłącznie import gotowej definicji i jej pozycję w `frontend/lib/menu/admin/index.ts`, zamykając `GATE-H07-M1`.
 
 ### 8. Testy porównują rezultaty, nie duplikują algorytmu produkcyjnego
 
@@ -100,18 +100,18 @@ Kanoniczny test seedów sprawdzi dokładnie `filip@demo.pl` (około 15%, pierwsz
 
 ## Risks / Trade-offs
 
-- [Brak formalnie pełnego kontraktu H07] → decyzja koordynatora ogranicza wdrożenie do minimalnego kształtu; zgłoszenie strażnika synchronizuje dokument, a H07 nie dodaje dalszych pól, filtrów ani błędów.
+- [Rozjazd dokumentu kontraktu z wdrożonym H07] → domknięcie synchronizuje dokładny minimalny kształt, a testy kontraktowe zapobiegają dodaniu dalszych pól, filtrów i błędów.
 - [Regresja fasady mogłaby rozjechać wszystkie widoki] → test H07 porównuje listę, szczegół i widok prowadzącego bezpośrednio z `ProgressAggregator::for()` na danych odróżniających iloraz sum od średniej procentów.
 - [Wywołanie agregatora per osoba może powodować N+1] → H07 używa zoptymalizowanej publicznej metody fasady i utrzymuje testowany limit zapytań bez własnego SQL liczącego rzetelność.
 - [Zmiana progu między dwoma żądaniami listy i szczegółów] → każde żądanie świadomie pokazuje aktualny próg; UI nie utrzymuje lokalnego źródła prawdy.
 - [Nieokreślone umiejscowienie osób bez wyniku] → kontrakt rozstrzyga je przed implementacją sortowania, dzięki czemu backend i frontend nie przyjmą różnych założeń.
 - [Awaria sekcji H07 mogłaby pogorszyć ekran H12] → slot ma własne granice stanów i retry, bez modyfikacji żądania H12.
-- [Wpis menu wymaga pliku wspólnego] → H07 dostarcza tylko per-pakietową definicję, a właściciel rejestru wykonuje `GATE-H07-M1`; bezpośredni URL pozostaje testowalny.
+- [Wpis menu wymaga pliku wspólnego] → zmiana integracyjna ogranicza się do importu per-pakietowej definicji i dodania jej do istniejącej listy; mechanizm menu i layout pozostają bez zmian.
 
 ## Migration Plan
 
-1. Właściciel fasady zamyka `GATE-H07-A1`, koordynator zatwierdza minimalny zakres mimo trwającej formalnej synchronizacji `GATE-H07-C1`, a gałąź H07 aktualizuje się z `origin/main` i ponownie potwierdza H12 jako `DONE` oraz własność pakietu.
-2. Backend powstaje od testów izolacji i spójności agregatora, następnie Requests, Resources, serwisy, kontrolery i `backend/routes/api/h07.php`; strażnik kontraktu niezależnie synchronizuje dokument z zaakceptowanym kształtem.
-3. Po ustabilizowaniu API powstaje ekran administracyjny i zawartość publicznego slotu H12; właściciel menu niezależnie zamyka `GATE-H07-M1`.
+1. Właściciel fasady zamyka `GATE-H07-A1`, koordynator zatwierdza minimalny zakres H07, a gałąź pakietu aktualizuje się z `origin/main` i ponownie potwierdza H12 jako `DONE` oraz własność pakietu.
+2. Backend powstaje od testów izolacji i spójności agregatora, następnie Requests, Resources, serwisy, kontrolery i `backend/routes/api/h07.php`.
+3. Po ustabilizowaniu API powstaje ekran administracyjny i zawartość publicznego slotu H12; zmiana domykająca synchronizuje kontrakt i rejestruje wpis menu, zamykając `GATE-H07-C1` oraz `GATE-H07-M1`.
 4. Dane demo, testy celowane, pełny backend, lint, build, kontrola własności plików i `DEMO/H07.md` stanowią bramkę do `REVIEW`.
 5. Wdrożenie nie wymaga migracji ani backfillu. Wycofanie polega na usunięciu tras i powierzchni H07 oraz per-pakietowego wpisu menu; nie cofa danych H06, H12 ani ustawień H19.
