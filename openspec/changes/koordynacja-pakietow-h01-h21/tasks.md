@@ -20,7 +20,7 @@
 - [ ] 3.3 H05 — Katalog kursów i sekwencyjne odblokowanie · Właściciel: `Mariusz` · Status: `W TOKU`; weryfikacja: kryteria ★ i testy H05 przechodzą, istnieje `DEMO/H05.md`.
 - [ ] 3.4 H06 — Lekcja, odtwarzacz i postęp · Właściciel: `Mikołaj` · Status: `BLOCKED` — brak wiążącego DTO lekcji/ukończenia i pola trwałej pozycji w schemacie; weryfikacja: kryteria ★ i testy H06 przechodzą, istnieje `DEMO/H06.md`.
 - [ ] 3.5 H10 — Testy wiedzy i warsztat · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: kryteria ★ i testy H10 przechodzą, istnieje `DEMO/H10.md`.
-- [ ] 3.6 H13★ — Minimum certyfikatu i warunków ukończenia · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: kryteria oznaczone ★ w H13 przechodzą, istnieje sekcja minimum w `DEMO/H13.md`.
+- [ ] 3.6 H13★ — Minimum certyfikatu i warunków ukończenia · Właściciel: `Tomek` · Status: `REVIEW` (PR #10); weryfikacja: kryteria oznaczone ★ w H13 przechodzą, istnieje sekcja minimum w `DEMO/H13.md`.
 - [x] 3.7 H16 — Powiadomienia, dzwonek i e-maile symulowane · Właściciel: `Irek` · Status: `DONE`; weryfikacja: kryteria ★ i testy H16 przechodzą, wiadomości trafiają wyłącznie do Mailpit, istnieje `DEMO/H16.md`.
 - [ ] 3.8 H18 — Panel osób i karta osoby · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: kryteria ★ i testy H18 przechodzą, istnieje `DEMO/H18.md`.
 - [ ] 3.9 H19 — Pulpit administracyjny i ustawienia edycji · Właściciel: `Błażej` · Status: `REVIEW` (PR #4); weryfikacja: kryteria ★ i testy H19 przechodzą, istnieje `DEMO/H19.md`.
@@ -36,7 +36,7 @@
 - [ ] 4.5 H09 — Wizytówki i przypisania prowadzących · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: kryteria akceptacji i testy H09 przechodzą, istnieje `DEMO/H09.md`.
 - [ ] 4.6 H11 — Dziennik stażu i akceptacje · Właściciel: `Mikołaj` · Status: `REVIEW`; weryfikacja: kryteria akceptacji i testy H11 przechodzą, istnieje `DEMO/H11.md`.
 - [ ] 4.7 H12 — Superwizje, zapisy i obecności · Właściciel: `Mikołaj` · Status: `W TOKU`; weryfikacja: kryteria akceptacji i testy H12 przechodzą, istnieje `DEMO/H12.md`.
-- [ ] 4.8 H13 — Pełny zakres certyfikatów i publicznej weryfikacji · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: wszystkie kryteria H13 przechodzą, `DEMO/H13.md` opisuje pełny scenariusz.
+- [ ] 4.8 H13 — Pełny zakres certyfikatów i publicznej weryfikacji · Właściciel: `Tomek` · Status: `REVIEW` (PR #10 — wraz z minimum ★ z 3.6); weryfikacja: wszystkie kryteria H13 przechodzą, `DEMO/H13.md` opisuje pełny scenariusz.
 - [ ] 4.9 Przeprowadzić ścieżkę P1 na danych demo; weryfikacja: rekrutacja, dostęp, nauka, staż, superwizje i certyfikat współpracują bez zmiany kontraktu API.
 
 ## 5. Fala P2
