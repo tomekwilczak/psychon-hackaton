@@ -1,6 +1,6 @@
 ## Purpose
 
-Zdolność „certyfikaty" obejmuje warunki ukończenia programu liczone z jednego
+Zdolność „certificate-issuance-verification" obejmuje warunki ukończenia programu liczone z jednego
 wspólnego agregatora, wydanie certyfikatu absolwenta (numer per edycja, PDF z
 kodem QR, zamrożony snapshot warunków, ustawienie daty ukończenia programu i wpis
 do dziennika działań) oraz publiczną weryfikację autentyczności certyfikatu po
