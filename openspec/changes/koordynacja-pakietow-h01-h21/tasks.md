@@ -31,7 +31,7 @@
 
 - [x] 4.1 H03 — Rekrutacja i kolejka zgłoszeń · Właściciel: `Mikołaj` · Status: `DONE` (PR #33 scalony); weryfikacja: kryteria akceptacji i testy H03 przechodzą, istnieje `DEMO/H03.md`.
 - [x] 4.2 H04 — Dostęp czasowy · Właściciel: `Irek` · Status: `DONE` (PR #20 scalony); weryfikacja: kryteria akceptacji i testy H04 przechodzą, istnieje `DEMO/H04.md`.
-- [ ] 4.3 H07 — Pomiar czasu nauki i rzetelność · Właściciel: `Mikołaj` · Status: `W TOKU`; weryfikacja: kryteria akceptacji i testy H07 przechodzą, istnieje `DEMO/H07.md`.
+- [x] 4.3 H07 — Pomiar czasu nauki i rzetelność · Właściciel: `Mikołaj` · Status: `DONE` (PR #49 scalony); weryfikacja: kryteria akceptacji i testy H07 przechodzą, istnieje `DEMO/H07.md`.
 - [ ] 4.4 H08 — CMS treści · Właściciel: `@_____` · Status: `GOTOWE`; weryfikacja: uzgodniona część H08a/H08b oraz jej testy przechodzą, istnieje `DEMO/H08.md` z jawnym zakresem.
 - [ ] 4.5 H09 — Wizytówki i przypisania prowadzących · Właściciel: `Tomek` · Status: `REVIEW` (gałąź `pakiet/H09-prowadzacy-wizytowki-przypisania`, zakres: backend + OpenSpec; frontend w kolejnej rundzie); weryfikacja: kryteria akceptacji i testy H09 przechodzą (412 backend), istnieje `DEMO/H09.md`; otwarte: K1–K12 do potwierdzenia przez strażnika kontraktu (`DEMO/H9-prep-doc.md` §6).
 - [x] 4.6 H11 — Dziennik stażu i akceptacje · Właściciel: `Mikołaj` · Status: `DONE`; weryfikacja: kryteria akceptacji i testy H11 przechodzą, istnieje `DEMO/H11.md`.
