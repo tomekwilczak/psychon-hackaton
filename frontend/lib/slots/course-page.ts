@@ -11,7 +11,7 @@
 import type { ComponentType } from "react";
 import type { CourseDetail, LessonSummary } from "@/lib/courses";
 import h05LessonStub from "./h05-lesson-stub";
-// import hXXNazwa from "./hXX-nazwa"; // ← dodaj swój slot jedną linią
+import h06LessonLink from "./h06-lesson-link";
 
 export type CoursePageRegion = "lesson" | "instructor" | "lesson-actions";
 
@@ -31,8 +31,8 @@ export interface CoursePageSlot {
 }
 
 export const coursePageSlots: CoursePageSlot[] = [
+  h06LessonLink,
   h05LessonStub,
-  // hXXNazwa, // ← i drugą tutaj
 ];
 
 /** Wszystkie sloty regionu, rosnąco wg `order`. Regiony są addytywne. */
