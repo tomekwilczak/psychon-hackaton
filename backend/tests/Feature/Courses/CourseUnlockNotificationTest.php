@@ -60,6 +60,20 @@ class CourseUnlockNotificationTest extends TestCase
         $this->assertSame(2, $this->unlockNotifications($marta)->count());
     }
 
+    public function test_a_volunteer_with_no_progress_is_not_told_that_stage_one_opened(): void
+    {
+        // Stage 1 is never locked, so announcing it would name something that
+        // was never shut. On the canonical seed the other guards happen to
+        // cover this, so `sequence_order > 1` needs its own oracle: mutating it
+        // to `>= 1` has to turn this test red.
+        $fresh = User::factory()->create();
+
+        Sanctum::actingAs($fresh);
+        $this->getJson('/api/v1/courses')->assertOk();
+
+        $this->assertSame(0, $this->unlockNotifications($fresh)->count());
+    }
+
     public function test_reading_the_catalogue_as_a_graduate_announces_nothing(): void
     {
         $ola = $this->user('ola@demo.pl');

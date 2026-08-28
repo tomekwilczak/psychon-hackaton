@@ -48,6 +48,21 @@ class MaterialDownloadController extends Controller
 
     private function assertReadable(User $user, Material $material): void
     {
+        // The signed route carries no `access.active` middleware — there is no
+        // session for it to run against — so the time-boxed gate is re-applied
+        // here by hand, with the same code and message as EnsureAccessActive.
+        // Without it a link issued while access was still active would outlive
+        // the access itself for up to the signature's 15-minute window.
+        if ($user->program_completed_at === null
+            && $user->access_expires_at !== null
+            && $user->access_expires_at->isPast()) {
+            throw new ApiException(
+                403,
+                'access_expired',
+                'Twój dostęp do materiałów wygasł. Skontaktuj się z opiekunem projektu.',
+            );
+        }
+
         $courseId = $material->course_id ?? $material->lesson?->course_id;
 
         if ($courseId === null) {

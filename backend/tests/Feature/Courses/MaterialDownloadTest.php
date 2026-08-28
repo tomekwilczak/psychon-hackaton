@@ -85,6 +85,24 @@ class MaterialDownloadTest extends TestCase
             ->assertJsonPath('error.code', 'course_locked');
     }
 
+    public function test_an_expired_account_cannot_use_a_link_issued_while_it_was_active(): void
+    {
+        // The signed route runs no `access.active` middleware, so the time-boxed
+        // gate has to hold in the controller — otherwise a link issued minutes
+        // before expiry outlives the access it was granted under.
+        $url = $this->downloadUrlFor('marta@demo.pl', 'wywiad-psychologiczny');
+
+        $marta = $this->user('marta@demo.pl');
+        $marta->forceFill([
+            'access_expires_at' => now()->subDay(),
+            'program_completed_at' => null,
+        ])->save();
+
+        $this->get($url)
+            ->assertStatus(403)
+            ->assertJsonPath('error.code', 'access_expired');
+    }
+
     public function test_a_material_of_a_course_outside_the_users_scope_is_not_found(): void
     {
         // The path courses are invisible to a student (role matrix §2) — the

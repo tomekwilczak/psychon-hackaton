@@ -16,6 +16,20 @@ use Illuminate\Http\Resources\Json\JsonResource;
  */
 class CourseListResource extends JsonResource
 {
+    /**
+     * The controller already computes the CourseAccess state — for the unlock
+     * notifier and for the 403 on a locked course — so it hands it in rather
+     * than making serialization pay for a second call per row. A null state
+     * means "compute it here", which keeps ::collection() usable without one.
+     *
+     * @param  Course  $resource
+     * @param  array{status: string, missing: list<string>, required_course_id?: int}|null  $state
+     */
+    public function __construct($resource, private readonly ?array $state = null)
+    {
+        parent::__construct($resource);
+    }
+
     public function toArray(Request $request): array
     {
         $user = $request->user();
@@ -40,7 +54,7 @@ class CourseListResource extends JsonResource
      */
     protected function statusFor(User $user): string
     {
-        $status = CourseAccess::state($user, $this->resource)['status'];
+        $status = ($this->state ?? CourseAccess::state($user, $this->resource))['status'];
 
         if ($status === 'locked' && ! CourseCatalogQuery::isParticipant($user)) {
             return 'in_progress';

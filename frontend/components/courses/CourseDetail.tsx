@@ -5,7 +5,7 @@ import Card from "@/components/ui/Card";
 import ProgressBar from "@/components/ui/ProgressBar";
 import {
   COURSE_STATUS_BADGE,
-  fileKindLabel,
+  formatFileSize,
   stageLabel,
   type CourseDetail as CourseDetailData,
 } from "@/lib/courses";
@@ -103,9 +103,11 @@ export default function CourseDetail({ course }: CourseDetailProps) {
                     <path d="M5 21h14" />
                   </svg>
                   {material.name}
-                  <span className="text-caption font-medium text-muted">
-                    {fileKindLabel(material.name)}
-                  </span>
+                  {formatFileSize(material.size) !== null && (
+                    <span className="text-caption font-medium text-muted">
+                      {formatFileSize(material.size)}
+                    </span>
+                  )}
                 </a>
               </li>
             ))}

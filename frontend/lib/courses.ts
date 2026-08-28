@@ -30,6 +30,11 @@ export interface LessonSummary {
 export interface CourseMaterial {
   id: number;
   name: string;
+  /**
+   * Rozmiar pliku w bajtach. Pole poza kontraktem §2 — dodane świadomie,
+   * zgłoszone strażnikowi jako odstępstwo (7) w `DEMO/H05.md`.
+   */
+  size: number | null;
   /** Podpisany link ważny 15 minut — kontrakt §2 „podpisany, wygasa". */
   download_url: string;
 }
@@ -77,15 +82,22 @@ export function formatDuration(seconds: number | null): string {
   return `${hours} godz. ${minutes} min`;
 }
 
-/**
- * Rodzaj pliku czytelny dla człowieka, wyprowadzony z nazwy. Kontrakt §2
- * nie przewiduje w materiale pola `size`, więc rozmiaru nie pokazujemy —
- * rozszerzenie jest jedyną informacją o pliku, którą mamy po stronie klienta.
- */
-export function fileKindLabel(name: string): string {
-  const extension = name.includes(".") ? name.split(".").pop() : undefined;
+/** Rozmiar pliku w formie czytelnej dla człowieka. */
+export function formatFileSize(bytes: number | null): string | null {
+  if (bytes === null || bytes <= 0) return null;
 
-  return extension ? `Plik ${extension.toUpperCase()}` : "Plik do pobrania";
+  if (bytes < 1024) return `${bytes} B`;
+
+  const units = ["kB", "MB", "GB"];
+  let value = bytes / 1024;
+  let unit = 0;
+
+  while (value >= 1024 && unit < units.length - 1) {
+    value /= 1024;
+    unit += 1;
+  }
+
+  return `${value < 10 ? value.toFixed(1) : Math.round(value)} ${units[unit]}`;
 }
 
 export function fetchCourses(

@@ -63,11 +63,12 @@ final class CourseUnlockNotifier
             // forbids FOR UPDATE with aggregates, hence the plain pluck.
             User::query()->whereKey($user->id)->lockForUpdate()->first();
 
-            // Batch query 2 of 2.
+            // Batch query 2 of 2. No FOR UPDATE here: the user row above is the
+            // mutex, and locking these rows too would reach into a table H16
+            // writes to on every „mark as read" without adding a guarantee.
             $announced = Notification::query()
                 ->where('user_id', $user->id)
                 ->where('type', self::TYPE)
-                ->lockForUpdate()
                 ->pluck('link');
 
             foreach ($candidates as $course) {

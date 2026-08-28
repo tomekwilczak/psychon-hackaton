@@ -52,8 +52,13 @@ class CourseDetailTest extends TestCase
             array_keys($data['lessons'][0]),
         );
 
-        $this->assertSame(['id', 'name', 'download_url'], array_keys($data['materials'][0]));
+        // Contract §2 lists a material as {id, name, download_url}. `size` is a
+        // deliberate widening shipped ahead of the guardian's ruling — deviation
+        // (7) in DEMO/H05.md. Pinned here so the extra field stays intentional:
+        // if the guardian refuses it, this assertion is what fails first.
+        $this->assertSame(['id', 'name', 'size', 'download_url'], array_keys($data['materials'][0]));
         $this->assertSame('Karta pracy — Wywiad psychologiczny.pdf', $data['materials'][0]['name']);
+        $this->assertIsInt($data['materials'][0]['size']);
 
         // Contract §2: „<podpisany, wygasa>" — the link must carry both.
         $link = $data['materials'][0]['download_url'];

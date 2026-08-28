@@ -36,14 +36,30 @@ class CourseController extends Controller
             ->orderBy('title')
             ->get();
 
+        // Computed once per course and reused: the notifier needs the state, and
+        // so does serialization. Only participants have a meaningful one — for
+        // everyone else the resource falls back and the gate does not apply.
+        $states = [];
+
         if (CourseCatalogQuery::isParticipant($user)) {
+            $states = $courses
+                ->mapWithKeys(fn (Course $course): array => [
+                    $course->id => CourseAccess::state($user, $course),
+                ])
+                ->all();
+
             $notifier->announce($user, $courses->map(fn (Course $course): array => [
                 'course' => $course,
-                'state' => CourseAccess::state($user, $course),
+                'state' => $states[$course->id],
             ]));
         }
 
-        return CourseListResource::collection($courses);
+        return CourseListResource::collection(
+            $courses->map(fn (Course $course): CourseListResource => new CourseListResource(
+                $course,
+                $states[$course->id] ?? null,
+            )),
+        );
     }
 
     public function show(Request $request, string $slug): CourseDetailResource
@@ -61,6 +77,8 @@ class CourseController extends Controller
             throw new ApiException(404, 'not_found', 'Nie znaleziono kursu.');
         }
 
+        $state = null;
+
         if (CourseCatalogQuery::isParticipant($user)) {
             $state = CourseAccess::state($user, $course);
 
@@ -69,7 +87,7 @@ class CourseController extends Controller
             }
         }
 
-        return CourseDetailResource::make($course);
+        return CourseDetailResource::make($course, $state);
     }
 
     /**

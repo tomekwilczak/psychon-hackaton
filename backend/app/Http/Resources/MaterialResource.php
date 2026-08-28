@@ -22,6 +22,12 @@ class MaterialResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            // Widening of contract §2, which lists a material as exactly
+            // {id, name, download_url}. The plan asked the UI to show a
+            // human-readable size and the column already carries it, so the
+            // field is shipped ahead of the guardian's ruling and flagged as
+            // deviation (7) in DEMO/H05.md. Bytes, integer — the front formats.
+            'size' => $this->size,
             'download_url' => URL::temporarySignedRoute(
                 'materials.download',
                 now()->addMinutes(self::LINK_TTL_MINUTES),
