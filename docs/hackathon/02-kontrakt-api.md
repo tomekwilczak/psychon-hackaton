@@ -124,18 +124,50 @@ Zablokowany → 403 `course_locked` (wzór w §1.1). Odblokowanie liczy wyłącz
 
 ### Postęp lekcji (H06)
 
+`GET /lessons/{id}` → 200 (każdy udany odczyt zwiększa `open_count` o 1):
+
+```json
+{ "data": {
+  "id": 21,
+  "title": "Wprowadzenie do wywiadu",
+  "description": "Opis lekcji",
+  "duration_seconds": 1800,
+  "watched_seconds": 812,
+  "active_seconds": 700,
+  "is_completed": false,
+  "completable": false,
+  "completable_at_percent": 60
+} }
+```
+
+`description` może być `null`. Liczniki pochodzą z postępu zalogowanego użytkownika;
+przy jego braku mają wartość `0`, a `is_completed` ma wartość `false`.
+Lekcja z kursu zablokowanego → 403 `course_locked` zgodnie z regułą `CourseAccess`.
+
 `POST /lessons/{id}/progress` (heartbeat ≤ co 30 s) — **przyrosty**, nazwy wiążące:
 
 ```json
-{ "position_seconds": 314, "watched_delta": 28, "active_delta": 25 }
+{ "watched_delta": 28, "active_delta": 25 }
 ```
 
 → 200 `{ "data": { "watched_seconds": 812, "active_seconds": 700,
 "completable": false, "completable_at_percent": 60 } }`
-Serwer: wartości tylko rosną; **`active_delta` przycinane do 35 s na żądanie**
-(idempotencja przy dwóch kartach/urządzeniach). Próg ukończenia =
-`editions.lesson_completion_percent` (klucz w §3.3).
-`POST /lessons/{id}/complete` → 200 albo 422 `not_enough_active_time`.
+Oba pola są wymaganymi, nieujemnymi liczbami całkowitymi. Naruszenie tych reguł
+→ 422 `validation_failed`. Serwer: wartości tylko rosną; wyłącznie
+**`active_delta` jest przycinane do 35 s na żądanie** (idempotencja przy dwóch
+kartach/urządzeniach). Próg ukończenia = `editions.lesson_completion_percent`
+(klucz w §3.3).
+
+`POST /lessons/{id}/complete` → 200:
+
+```json
+{ "data": { "is_completed": true,
+  "completed_at": "2026-10-03T12:30:00Z" } }
+```
+
+Poniżej progu → 422 `not_enough_active_time`. Lekcja z `duration_seconds = 0` nigdy
+nie jest `completable`; próba ukończenia również zwraca 422
+`not_enough_active_time`.
 
 ### Test (H10)
 
