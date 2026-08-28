@@ -250,7 +250,7 @@ flowchart LR
   end
   subgraph TD["Tor D · program poza kursami"]
     direction LR
-    D0["H11"]:::done --> D1["H12"]:::done --> D2["H07"]:::wip
+    D0["H11"]:::done --> D1["H12"]:::done --> D2["H07"]:::done
   end
   subgraph TE["Tor E · treści i ludzie"]
     direction LR
@@ -263,9 +263,9 @@ flowchart LR
 ```
 
 Stan wg `openspec/changes/koordynacja-pakietow-h01-h21/tasks.md` (2026-08-28, po scaleniu H20,
-H17 i H09): `DONE`/`REVIEW` → zielony, `W TOKU` → żółty, `GOTOWE` (nieodebrany) i `BLOCKED` →
-czerwony. Został jeden pakiet żółty (H07) i jeden czerwony ciąg — H08a/H08b, bo H08 wciąż
-nie ma właściciela.
+H17, H09 i H07): `DONE`/`REVIEW` → zielony, `W TOKU` → żółty, `GOTOWE` (nieodebrany) i
+`BLOCKED` → czerwony. Nie ma już pakietu żółtego; jedyny niezielony ciąg to H08a/H08b, bo H08
+wciąż nie ma właściciela na tablicy.
 
 Uwaga do torów A i E: strzałka `H21 → H01 → H05` nie jest blokadą techniczną, tylko
 **kolejnością zwrotu z inwestycji** — H21 i H19 to pakiety S, dowożone w kilka godzin,
