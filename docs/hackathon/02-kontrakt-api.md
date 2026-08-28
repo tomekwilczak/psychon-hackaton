@@ -124,18 +124,50 @@ Zablokowany → 403 `course_locked` (wzór w §1.1). Odblokowanie liczy wyłącz
 
 ### Postęp lekcji (H06)
 
+`GET /lessons/{id}` → 200 (każdy udany odczyt zwiększa `open_count` o 1):
+
+```json
+{ "data": {
+  "id": 21,
+  "title": "Wprowadzenie do wywiadu",
+  "description": "Opis lekcji",
+  "duration_seconds": 1800,
+  "watched_seconds": 812,
+  "active_seconds": 700,
+  "is_completed": false,
+  "completable": false,
+  "completable_at_percent": 60
+} }
+```
+
+`description` może być `null`. Liczniki pochodzą z postępu zalogowanego użytkownika;
+przy jego braku mają wartość `0`, a `is_completed` ma wartość `false`.
+Lekcja z kursu zablokowanego → 403 `course_locked` zgodnie z regułą `CourseAccess`.
+
 `POST /lessons/{id}/progress` (heartbeat ≤ co 30 s) — **przyrosty**, nazwy wiążące:
 
 ```json
-{ "position_seconds": 314, "watched_delta": 28, "active_delta": 25 }
+{ "watched_delta": 28, "active_delta": 25 }
 ```
 
 → 200 `{ "data": { "watched_seconds": 812, "active_seconds": 700,
 "completable": false, "completable_at_percent": 60 } }`
-Serwer: wartości tylko rosną; **`active_delta` przycinane do 35 s na żądanie**
-(idempotencja przy dwóch kartach/urządzeniach). Próg ukończenia =
-`editions.lesson_completion_percent` (klucz w §3.3).
-`POST /lessons/{id}/complete` → 200 albo 422 `not_enough_active_time`.
+Oba pola są wymaganymi, nieujemnymi liczbami całkowitymi. Naruszenie tych reguł
+→ 422 `validation_failed`. Serwer: wartości tylko rosną; wyłącznie
+**`active_delta` jest przycinane do 35 s na żądanie** (idempotencja przy dwóch
+kartach/urządzeniach). Próg ukończenia = `editions.lesson_completion_percent`
+(klucz w §3.3).
+
+`POST /lessons/{id}/complete` → 200:
+
+```json
+{ "data": { "is_completed": true,
+  "completed_at": "2026-10-03T12:30:00Z" } }
+```
+
+Poniżej progu → 422 `not_enough_active_time`. Lekcja z `duration_seconds = 0` nigdy
+nie jest `completable`; próba ukończenia również zwraca 422
+`not_enough_active_time`.
 
 ### Test (H10)
 
@@ -165,18 +197,81 @@ Warsztat: `POST /admin/workshop/{userId}/complete` → 200 [audyt].
 
 ### Staż (H11)
 
-`POST /internship/entries`
+H11 rejestruje dokładnie sześć operacji. Nie ma `GET /internship/entries/{id}`.
+
+#### Zasób uczestnika
+
+W odpowiedzi uczestnika `data` zawiera dokładnie pola:
 
 ```json
-{ "date": "2026-10-03", "hours": "3.5", "form": "phone_duty",
-  "consultations_count": 4, "description": "Dyżur telefoniczny — bez danych osób." }
+{
+  "id": 91,
+  "date": "2026-08-27",
+  "hours": "3.5",
+  "form": "phone_duty",
+  "consultations_count": 4,
+  "description": "Dyżur telefoniczny — bez danych osób.",
+  "status": "submitted",
+  "review_comment": null,
+  "decided_at": null,
+  "created_at": "2026-08-27T18:00:00Z",
+  "updated_at": "2026-08-27T18:00:00Z"
+}
 ```
 
-→ 201 `{ "data": { "id": 91, "status": "submitted", … } }`
-`GET /internship/entries` → lista + `meta.extra.accepted_hours / required_hours`.
-Wpis `returned` można edytować `PATCH` → status wraca na `submitted`; wpis `accepted`
-→ `PATCH` = 403 `entry_locked`. `POST /admin/internship/{id}/return {comment}` →
-200; brak `comment` → 422. Cudzy wpis (`GET/PATCH` po id) → 404.
+`date` jest datą kalendarzową `YYYY-MM-DD`; nie może być późniejsza niż dzień
+bieżący. `hours` jest dziesiętnym stringiem od `"0.5"` do `"24"`, w krokach co
+`0.5`. `form` przyjmuje wyłącznie `phone_duty`, `chat_duty` albo `other`.
+`consultations_count` jest nieujemną liczbą całkowitą. `review_comment` i
+`decided_at` mogą być `null`, a pola czasu są ISO 8601 UTC. Zasób nie zawiera
+`user_id`, `decided_by` ani danych administratora.
+
+#### Operacje uczestnika
+
+- `GET /internship/entries` → `200`, standardowa paginowana lista wyłącznie
+  własnych wpisów. `meta.extra` zawiera dokładnie `accepted_hours` i
+  `required_hours` jako dziesiętne stringi. `accepted_hours` obejmuje wyłącznie
+  wpisy `accepted`; `required_hours` pochodzi z
+  `Settings::edition('internship_hours_required')`.
+- `POST /internship/entries` z polami `date`, `hours`, `form`,
+  `consultations_count`, `description` → `201`, pełny zasób uczestnika ze
+  statusem `submitted`. `user_id` z żądania jest ignorowane/nie jest polem
+  wejściowym.
+- `PATCH /internship/entries/{id}` z tymi samymi polami → `200`, pełny zasób
+  uczestnika. Wpis `returned` po edycji wraca do `submitted` i zachowuje
+  `review_comment`. Wpis `accepted` zwraca `403 entry_locked` i nie jest
+  zmieniany. Cudzy albo nieistniejący identyfikator zwraca `404 not_found`.
+
+#### Zasób administracyjny i kolejka
+
+`GET /admin/internship/pending` → `200`, standardowa paginacja (domyślnie
+`per_page=25`, maksymalnie `100`), wyłącznie wpisy `submitted`, sortowane po
+`created_at` rosnąco, a przy remisie po `id` rosnąco. Każdy element zawiera
+pełny zasób uczestnika oraz dokładnie:
+
+```json
+"user": { "id": 17, "first_name": "Marta", "last_name": "Demo" }
+```
+
+Nie są zwracane inne pola użytkownika ani administratora.
+
+#### Decyzje administracyjne
+
+- `POST /admin/internship/{id}/accept` bez ciała → `200` z pełnym zasobem
+  administracyjnym po zmianie na `accepted`.
+- `POST /admin/internship/{id}/return` z wymaganym niepustym stringiem
+  `{ "comment": "Uzupełnij opis dyżuru." }` → `200` z pełnym zasobem
+  administracyjnym po zmianie na `returned`. Brak albo pusty komentarz →
+  `422 validation_failed`.
+
+Obie decyzje są dostępne wyłącznie dla administracji i tylko dla statusu
+`submitted`. Powtórzona albo sprzeczna decyzja zwraca `403 entry_locked` bez
+zmiany wpisu, dodatkowego audytu i powiadomienia. Odesłanie wymaga komentarza;
+ponowne złożenie zachowuje komentarz opiekuna, również po późniejszej akceptacji.
+
+Akceptacja emituje wyłącznie powiadomienie i audyt `internship.accepted`, a
+odesłanie wyłącznie `internship.returned`; oba przechodzą odpowiednio przez
+`Notify::send` i `AuditLog::record`.
 
 ### Superwizja (H12)
 

@@ -8,6 +8,8 @@
 import h21Start from "./h21-start";
 import h05Kursy from "./h05-kursy";
 import h01Profil from "./h01-profil";
+import h14Dokumenty from "./h14-dokumenty";
+import h13Certyfikat from "./h13-certyfikat";
 // import hXXNazwa from "./hXX-nazwa"; // ← dodaj swój wpis jedną linią
 
 import { sortMenu, type MenuEntry } from "../types";
@@ -16,5 +18,7 @@ export const participantMenu: MenuEntry[] = sortMenu([
   h21Start,
   h05Kursy,
   h01Profil,
+  h14Dokumenty,
+  h13Certyfikat,
   // hXXNazwa, // ← i drugą tutaj
 ]);
