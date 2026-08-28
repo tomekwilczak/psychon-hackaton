@@ -226,33 +226,44 @@ Tor = ciąg pakietów, w którym każdy kolejny korzysta z ekranu poprzedniego. 
 
 ```mermaid
 flowchart LR
-  classDef t fill:#fff7ed,stroke:#c2410c,color:#111827
+  classDef done fill:#86efac,stroke:#15803d,color:#111827
+  classDef wip fill:#fde68a,stroke:#b45309,color:#111827
+  classDef todo fill:#fca5a5,stroke:#b91c1c,color:#111827
 
+  subgraph LG["Legenda"]
+    direction LR
+    L1["gotowe / w review"]:::done
+    L2["w toku"]:::wip
+    L3["nierozpoczęte / zablokowane"]:::todo
+  end
   subgraph TA["Tor A · ścieżka uczestnika"]
     direction LR
-    A0["H21"] --> A1["H01"] --> A2["H05"] --> A3["H06"] --> A4["H10"] --> A5["H13 ★"]
+    A0["H21"]:::done --> A1["H01"]:::done --> A2["H05"]:::done --> A3["H06"]:::done --> A4["H10"]:::done --> A5["H13 ★"]:::done
   end
   subgraph TB["Tor B · administracja"]
     direction LR
-    B0["H19"] --> B1["H18"] --> B2["H03"] --> B3["H20"]
+    B0["H19"]:::done --> B1["H18"]:::todo --> B2["H03"]:::wip --> B3["H20"]:::todo
   end
   subgraph TC["Tor C · szyna i uprawnienia"]
     direction LR
-    C0["H16"] --> C1["H02 szkielet"] --> C2["H04"] --> C3["H02 domknięcie"]
+    C0["H16"]:::done --> C1["H02 szkielet"]:::done --> C2["H04"]:::done --> C3["H02 domknięcie"]:::done
   end
   subgraph TD["Tor D · program poza kursami"]
     direction LR
-    D0["H11"] --> D1["H12"] --> D2["H07"]
+    D0["H11"]:::done --> D1["H12"]:::done --> D2["H07"]:::todo
   end
   subgraph TE["Tor E · treści i ludzie"]
     direction LR
-    E0["H08a"] --> E1["H08b"] --> E2["H09"] --> E3["H17"]
+    E0["H08a"]:::todo --> E1["H08b"]:::todo --> E2["H09"]:::todo --> E3["H17"]:::todo
   end
   subgraph TF["Tor F · dokumenty"]
     direction LR
-    F0["H14"] --> F1["H15"]
+    F0["H14"]:::done --> F1["H15"]:::wip
   end
 ```
+
+Stan wg `openspec/changes/koordynacja-pakietow-h01-h21/tasks.md` (2026-08-28): `DONE`/`REVIEW` →
+zielony, `W TOKU` → żółty, `GOTOWE` (nieodebrany) i `BLOCKED` → czerwony.
 
 Uwaga do torów A i E: strzałka `H21 → H01 → H05` nie jest blokadą techniczną, tylko
 **kolejnością zwrotu z inwestycji** — H21 i H19 to pakiety S, dowożone w kilka godzin,
