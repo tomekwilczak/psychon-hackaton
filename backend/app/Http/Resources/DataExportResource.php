@@ -2,13 +2,14 @@
 
 namespace App\Http\Resources;
 
+use App\Models\DataExport;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * RODO export status (H01). Contract shape: {"id": "ex_…", "status": "queued"}.
  *
- * @mixin \App\Models\DataExport
+ * @mixin DataExport
  */
 class DataExportResource extends JsonResource
 {
