@@ -99,6 +99,8 @@ z tokenów — spodziewana nierówność wizualna jest świadomym kosztem warian
 Gałąź `pakiet/HXX-nazwa` → PR (szablon z checklistą DoD) → review partnerskie →
 review liaisona → merge (sztab). CI zielone obowiązkowo. Funkcja nieskończona przy
 code freeze → wyłączana flagą `features.hXX`.
+Pełna checklista bezpiecznej pracy z remote'ami, branchem, OpenSpec, commitem i PR-em:
+[`06-workflow-pakietu-i-pr.md`](06-workflow-pakietu-i-pr.md).
 Mock ponad blokadę: czekasz na cudzy endpoint → pracuj na seedach zgodnych z kontraktem
 i oznacz `// TODO(HXX)`.
 Wyniki opisujesz w **`DEMO/HXX.md`** (plik per pakiet — nie wspólny).
