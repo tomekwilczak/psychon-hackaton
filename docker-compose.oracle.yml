@@ -56,8 +56,7 @@ services:
       - traefik.http.routers.psychon-api.priority=200
       - traefik.http.routers.psychon-api.tls=true
       - traefik.http.routers.psychon-api.tls.certresolver=leresolver
-      # Basic Auth i token Bearer używają tego samego nagłówka Authorization.
-      # UI chroni Basic Auth, a API egzekwuje uprawnienia przez Laravel Sanctum.
+      # API egzekwuje uprawnienia przez Laravel Sanctum; staging zawiera tylko dane demo.
       - traefik.http.routers.psychon-api.middlewares=psychon-noindex
       - traefik.http.services.psychon-api.loadbalancer.server.port=8080
     networks:
@@ -128,8 +127,7 @@ services:
       - traefik.http.routers.psychon-web.priority=100
       - traefik.http.routers.psychon-web.tls=true
       - traefik.http.routers.psychon-web.tls.certresolver=leresolver
-      - traefik.http.routers.psychon-web.middlewares=psychon-auth,psychon-noindex
-      - traefik.http.middlewares.psychon-auth.basicauth.users=${BASIC_AUTH_CREDENTIALS:?ustaw BASIC_AUTH_CREDENTIALS w deploy/oracle/.env}
+      - traefik.http.routers.psychon-web.middlewares=psychon-noindex
       - traefik.http.middlewares.psychon-noindex.headers.customresponseheaders.X-Robots-Tag=noindex,nofollow
       - traefik.http.services.psychon-web.loadbalancer.server.port=3000
     networks:

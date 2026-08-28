@@ -5,17 +5,16 @@ Mikołaja. Nie wystawia nowych portów publicznych i nie uruchamia drugiego reve
 Frontend i API dołączają do istniejącej sieci `n8n_traefik`, a HTTPS obsługuje istniejący
 Traefik z resolverem `leresolver`.
 
-Basic Auth chroni interfejs WWW. API nie może używać tej samej warstwy, ponieważ aplikacja
-uwierzytelnia żądania nagłówkiem `Authorization: Bearer`. Endpointy danych są chronione
-po stronie Laravel Sanctum zgodnie z kontraktem API; na stagingu znajdują się wyłącznie
-dane demo.
+Interfejs i API są dostępne publicznie przez HTTPS, ale endpointy danych są chronione po
+stronie Laravel Sanctum zgodnie z kontraktem API. Na stagingu znajdują się wyłącznie dane
+demo, a nagłówek `X-Robots-Tag` blokuje indeksowanie.
 
 ## Założenia
 
 - domena: `psychon.mgmurski.pl`;
 - rekord `A` wskazuje `130.61.81.230`;
 - sieć Docker `n8n_traefik` już istnieje;
-- środowisko jest stagingiem z danymi testowymi, Basic Auth i `noindex`;
+- środowisko jest stagingiem z danymi testowymi i `noindex`;
 - prawdziwe sekrety są tylko w `deploy/oracle/.env` na VPS-ie.
 - zależności, pliki runtime i build Next.js są w prywatnych wolumenach Dockera, a nie
   w katalogu Git.
@@ -28,9 +27,6 @@ cd ~/psychon
 bash deploy/oracle/bootstrap-server.sh
 bash deploy/oracle/deploy.sh
 ```
-
-Skrypt bootstrapujący zapisze dane Basic Auth w chronionym pliku
-`deploy/oracle/.access`. Pliku nie wolno commitować ani przesyłać komunikatorem.
 
 ## Seedy demo
 
