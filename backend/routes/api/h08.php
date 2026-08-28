@@ -15,6 +15,7 @@
 */
 
 use App\Http\Controllers\Api\V1\Admin\CourseCatalogAdminController;
+use App\Http\Controllers\Api\V1\Admin\CourseInviteController;
 use App\Http\Controllers\Api\V1\Admin\CourseSequenceController;
 use App\Http\Controllers\Api\V1\Admin\LessonAdminController;
 use App\Http\Controllers\Api\V1\Admin\MaterialAdminController;
@@ -51,4 +52,9 @@ Route::middleware(['auth:sanctum', 'role:project_manager,super_admin'])->group(f
     Route::post('/admin/lessons/{lesson}/materials', [MaterialAdminController::class, 'storeForLesson'])->whereNumber('lesson');
     Route::post('/admin/courses/{course}/materials', [MaterialAdminController::class, 'storeForCourse'])->whereNumber('course');
     Route::delete('/admin/materials/{material}', [MaterialAdminController::class, 'destroy'])->whereNumber('material');
+
+    // H08b · zaproszenia. Zapraszamy wyłącznie na kursy poza główną ścieżką
+    // (M4 pkt 6) — regułę trzyma `CourseInviter`, trasa jest zwykłą akcją
+    // domenową na pod-zasobie.
+    Route::post('/admin/courses/{course}/invite', [CourseInviteController::class, 'invite'])->whereNumber('course');
 });
